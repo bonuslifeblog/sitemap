@@ -1,0 +1,17 @@
+{
+  "name": "video-factory",
+  "version": "1.0.0",
+  "description": "Fábrica de Reels/Shorts em partículas (estilo Anatomia)",
+  "scripts": {
+    "render": "node engine/render.js",
+    "stills": "node engine/render.js --stills"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fontsource/anton": "^5.3.0",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@fontsource/inter": "^5.3.0"
+  }
+}

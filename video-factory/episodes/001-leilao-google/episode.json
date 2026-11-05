@@ -1,0 +1,79 @@
+{
+  "series": "GOOGLE ADS · ANATOMIA DO LEILÃO",
+  "handle": "@osergiocarvalho",
+  "sources": "MODELO CLÁSSICO DE AD RANK · SUPORTE GOOGLE ADS",
+  "subtitles": true,
+  "coverAt": 3.6,
+  "voice": "onwK4e9ZLuTAKqWW03F9",
+  "musicGain": 0.32,
+  "scenes": [
+    {
+      "type": "hook",
+      "vo": "Ele pagou menos da metade por clique. E ainda ficou acima de você no Google.",
+      "kicker": "GOOGLE ADS",
+      "title": ["ANATOMIA", "DO LEILÃO"],
+      "glyph": "$",
+      "lock": { "x": 540, "y": 1010, "at": 2.6, "label": "ALVO FIXADO · SEU CPC" },
+      "tags": ["4,00 $  →  1,61 $", "QUEM PAGA MENOS, GANHA"]
+    },
+    {
+      "type": "headline",
+      "vo": "Todo clique no Google Ads é um leilão. Ele acontece em menos de um segundo, toda vez que alguém pesquisa.",
+      "top": "TODO CLIQUE",
+      "big": "< 1 s",
+      "bottom": "É UM LEILÃO",
+      "chips": ["A CADA PESQUISA · UM NOVO LEILÃO"]
+    },
+    {
+      "type": "bars",
+      "vo": "Você deu um lance de quatro dólares. Seu concorrente, só dois.",
+      "caption": "LANCE MÁXIMO POR CLIQUE",
+      "headline": "O LANCE",
+      "items": [
+        { "label": "VOCÊ", "value": 4, "dec": 2, "suffix": " $", "color": "white", "at": 0.4 },
+        { "label": "CONCORRENTE", "value": 2, "dec": 2, "suffix": " $", "color": "gold", "at": 2.9 }
+      ],
+      "chips": ["VOCÊ PAGA O DOBRO · × 2"],
+      "chipsAt": 3.8
+    },
+    {
+      "type": "equation",
+      "vo": "Mas o Google não olha só o lance. Ele multiplica pelo Índice de Qualidade: uma nota de um a dez.",
+      "caption": "A FÓRMULA DO RANKING",
+      "terms": ["LANCE", "×", "QI", "=", "AD RANK"],
+      "dial": { "max": 10, "label": "ÍNDICE DE QUALIDADE", "at": 4.0, "sweep": 2.4 },
+      "chips": ["RELEVÂNCIA · CTR ESPERADO · PÁGINA"]
+    },
+    {
+      "type": "bars",
+      "vo": "Sua nota é quatro: dezesseis pontos. A dele é dez: vinte pontos. Ele fica em primeiro.",
+      "caption": "AD RANK = LANCE × QI",
+      "headline": "O RANKING",
+      "items": [
+        { "label": "VOCÊ", "sub": "4 $ × QI 4", "value": 16, "dec": 0, "color": "white", "at": 0.3 },
+        { "label": "CONCORRENTE", "sub": "2 $ × QI 10", "value": 20, "dec": 0, "color": "gold", "at": 2.9 }
+      ],
+      "winner": 1,
+      "winnerAt": 5.4,
+      "winnerLabel": "1º LUGAR"
+    },
+    {
+      "type": "price",
+      "vo": "E paga só o necessário pra passar você: um dólar e sessenta e um centavos. Menos da metade do seu lance.",
+      "caption": "QUANTO ELE PAGA POR CLIQUE",
+      "formula": "(16 ÷ 10) + 0,01",
+      "result": "1,61 $",
+      "compareAt": 5.4,
+      "compare": { "from": 4, "to": 1.61, "labelFrom": "SEU LANCE · 4,00 $", "labelTo": "O CLIQUE DELE · 1,61 $", "delta": "−60 %" },
+      "chips": ["AD RANK DE QUEM ESTÁ ABAIXO ÷ SEU QI + 0,01"]
+    },
+    {
+      "type": "outro",
+      "vo": "No leilão, página melhor paga menos. Qualidade é desconto. Segue, pra entender o jogo antes de colocar dinheiro nele.",
+      "lines": ["QUALIDADE", "É DESCONTO"],
+      "cta": "SEGUE PRA ENTENDER O JOGO",
+      "extra": 0.6,
+      "spiralAt": 6.0
+    }
+  ]
+}
