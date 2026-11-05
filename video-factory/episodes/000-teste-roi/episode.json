@@ -1,0 +1,52 @@
+{
+  "series": "TRÁFEGO PAGO · ANATOMIA DO ROI",
+  "handle": "@osergiocarvalho",
+  "sources": "CÁLCULO: ROAS = RETORNO ÷ GASTO · ROI = (RETORNO − GASTO) ÷ GASTO",
+  "subtitles": true,
+  "coverAt": 3.0,
+  "voice": "onwK4e9ZLuTAKqWW03F9",
+  "musicGain": 0.32,
+  "gap": 0.3,
+  "voCuts": [8.12, 16.24, 22.07],
+  "scenes": [
+    {
+      "type": "hook",
+      "vo": "Ele gastou mil dólares em anúncios e recebeu mil e trezentos. Lucro de cento e trinta por cento? Não.",
+      "kicker": "TRÁFEGO PAGO",
+      "title": ["ANATOMIA", "DO ROI"],
+      "glyph": "%",
+      "lock": { "x": 540, "y": 1010, "at": 4.2, "label": "ERRO DETECTADO" },
+      "tags": ["130 %  ≠  LUCRO", "O PAINEL NÃO MENTE. A LEITURA, SIM."]
+    },
+    {
+      "type": "bars",
+      "vo": "Mil e trezentos sobre mil é o ROAS. Mede o retorno bruto, não o lucro.",
+      "caption": "ROAS = RETORNO ÷ GASTO",
+      "headline": "O ROAS",
+      "items": [
+        { "label": "GASTO", "value": 1000, "dec": 0, "suffix": " $", "color": "white", "at": 0.3 },
+        { "label": "RETORNO", "value": 1300, "dec": 0, "suffix": " $", "color": "gold", "at": 0.9 }
+      ],
+      "chips": ["ROAS 1,3 · RETORNO BRUTO"],
+      "chipsAt": 2.4
+    },
+    {
+      "type": "price",
+      "vo": "O lucro é trezentos. Trezentos sobre mil: ROI de trinta por cento.",
+      "caption": "ROI = (RETORNO − GASTO) ÷ GASTO",
+      "formula": "(1.300 − 1.000) ÷ 1.000",
+      "result": "30 %",
+      "compareAt": 3.2,
+      "compare": { "from": 130, "to": 30, "labelFrom": "O QUE ELE ACHOU · 130 %", "labelTo": "O LUCRO REAL · 30 %", "delta": "ROI 30 %" },
+      "chips": ["LUCRO = 1.300 − 1.000 = 300 $"]
+    },
+    {
+      "type": "outro",
+      "vo": "ROAS não é lucro. Segue, pra não se enganar com o painel.",
+      "lines": ["ROAS", "NÃO É LUCRO"],
+      "cta": "SEGUE PRA LER O PAINEL CERTO",
+      "spiralAt": 2.7,
+      "extra": 1.4
+    }
+  ]
+}

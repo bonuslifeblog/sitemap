@@ -24,7 +24,7 @@
   const ease = t => { t = clamp(t); return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
   const easeOut = t => 1 - Math.pow(1 - clamp(t), 3);
   const prog = (t, a, d) => clamp((t - a) / d);
-  const fmt = (v, dec, suf = '') => v.toFixed(dec).replace('.', ',') + suf;
+  const fmt = (v, dec, suf = '') => v.toLocaleString('pt-BR', { minimumFractionDigits: dec, maximumFractionDigits: dec }) + suf;
 
   function shuffle(arr, seed) { const r = mulberry(seed); for (let i = arr.length - 1; i > 0; i--) { const j = (r() * (i + 1)) | 0; [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
 
@@ -277,6 +277,11 @@
       },
       draw(sc, t) {
         const end = sc.spiralAt ?? sc.dur - 1.6;
+        if (t <= end) {
+          const fade = Math.min(prog(t, .5, .5), clamp((end - t) / .25));
+          text(sc.lines[0], W / 2, 820, { size: 200, alpha: fade, glowC: '#fff' });
+          if (sc.lines[1]) text(sc.lines[1], W / 2, 1080, { size: 200, alpha: Math.min(prog(t, .8, .5), clamp((end - t) / .25)), color: THEME.accent, glowC: THEME.accent });
+        }
         if (t > end) {
           text(EP.handle, W / 2, 960, { size: 90, alpha: prog(t, end + .3, .5), glowC: THEME.accent });
           mono(sc.cta || '', W / 2, 1460, { color: THEME.accent, alpha: prog(t, end + .3, .5), spacing: 8, size: 26 });
