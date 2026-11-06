@@ -16,7 +16,7 @@
       "title": ["ANATOMIA", "DO ROI"],
       "glyph": "%",
       "lock": { "x": 540, "y": 1010, "at": 4.2, "label": "ERRO DETECTADO" },
-      "tags": ["130 %  ≠  LUCRO", "O PAINEL NÃO MENTE. A LEITURA, SIM."]
+      "tags": ["130% ≠ LUCRO", "O PAINEL NÃO MENTE. A LEITURA, SIM."]
     },
     {
       "type": "bars",
@@ -24,8 +24,8 @@
       "caption": "ROAS = RETORNO ÷ GASTO",
       "headline": "O ROAS",
       "items": [
-        { "label": "GASTO", "value": 1000, "dec": 0, "suffix": " $", "color": "white", "at": 0.3 },
-        { "label": "RETORNO", "value": 1300, "dec": 0, "suffix": " $", "color": "gold", "at": 0.9 }
+        { "label": "GASTO", "value": 1000, "dec": 0, "prefix": "US$ ", "color": "white", "at": 0.3 },
+        { "label": "RETORNO", "value": 1300, "dec": 0, "prefix": "US$ ", "color": "gold", "at": 0.9 }
       ],
       "chips": ["ROAS 1,3 · RETORNO BRUTO"],
       "chipsAt": 2.4
@@ -35,10 +35,10 @@
       "vo": "O lucro é trezentos. Trezentos sobre mil: ROI de trinta por cento.",
       "caption": "ROI = (RETORNO − GASTO) ÷ GASTO",
       "formula": "(1.300 − 1.000) ÷ 1.000",
-      "result": "30 %",
+      "result": "30%",
       "compareAt": 3.2,
-      "compare": { "from": 130, "to": 30, "labelFrom": "O QUE ELE ACHOU · 130 %", "labelTo": "O LUCRO REAL · 30 %", "delta": "ROI 30 %" },
-      "chips": ["LUCRO = 1.300 − 1.000 = 300 $"]
+      "compare": { "from": 130, "to": 30, "labelFrom": "O QUE ELE ACHOU · 130%", "labelTo": "O LUCRO REAL · 30%", "delta": "ROI 30%" },
+      "chips": ["LUCRO = 1.300 − 1.000 = US$ 300"]
     },
     {
       "type": "outro",

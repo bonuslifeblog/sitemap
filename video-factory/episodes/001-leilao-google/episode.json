@@ -14,7 +14,7 @@
       "title": ["ANATOMIA", "DO LEILÃO"],
       "glyph": "$",
       "lock": { "x": 540, "y": 1010, "at": 2.6, "label": "ALVO FIXADO · SEU CPC" },
-      "tags": ["4,00 $  →  1,61 $", "QUEM PAGA MENOS, GANHA"]
+      "tags": ["US$ 4,00 → US$ 1,61", "QUEM PAGA MENOS, GANHA"]
     },
     {
       "type": "headline",
@@ -30,8 +30,8 @@
       "caption": "LANCE MÁXIMO POR CLIQUE",
       "headline": "O LANCE",
       "items": [
-        { "label": "VOCÊ", "value": 4, "dec": 2, "suffix": " $", "color": "white", "at": 0.4 },
-        { "label": "CONCORRENTE", "value": 2, "dec": 2, "suffix": " $", "color": "gold", "at": 2.9 }
+        { "label": "VOCÊ", "value": 4, "dec": 2, "prefix": "US$ ", "color": "white", "at": 0.4 },
+        { "label": "CONCORRENTE", "value": 2, "dec": 2, "prefix": "US$ ", "color": "gold", "at": 2.9 }
       ],
       "chips": ["VOCÊ PAGA O DOBRO · × 2"],
       "chipsAt": 3.8
@@ -50,8 +50,8 @@
       "caption": "AD RANK = LANCE × QI",
       "headline": "O RANKING",
       "items": [
-        { "label": "VOCÊ", "sub": "4 $ × QI 4", "value": 16, "dec": 0, "color": "white", "at": 0.3 },
-        { "label": "CONCORRENTE", "sub": "2 $ × QI 10", "value": 20, "dec": 0, "color": "gold", "at": 2.9 }
+        { "label": "VOCÊ", "sub": "US$ 4 × QI 4", "value": 16, "dec": 0, "color": "white", "at": 0.3 },
+        { "label": "CONCORRENTE", "sub": "US$ 2 × QI 10", "value": 20, "dec": 0, "color": "gold", "at": 2.9 }
       ],
       "winner": 1,
       "winnerAt": 5.4,
@@ -62,9 +62,9 @@
       "vo": "E paga só o necessário pra passar você: um dólar e sessenta e um centavos. Menos da metade do seu lance.",
       "caption": "QUANTO ELE PAGA POR CLIQUE",
       "formula": "(16 ÷ 10) + 0,01",
-      "result": "1,61 $",
+      "result": "US$ 1,61",
       "compareAt": 5.4,
-      "compare": { "from": 4, "to": 1.61, "labelFrom": "SEU LANCE · 4,00 $", "labelTo": "O CLIQUE DELE · 1,61 $", "delta": "−60 %" },
+      "compare": { "from": 4, "to": 1.61, "labelFrom": "SEU LANCE · US$ 4,00", "labelTo": "O CLIQUE DELE · US$ 1,61", "delta": "−60%" },
       "chips": ["AD RANK DE QUEM ESTÁ ABAIXO ÷ SEU QI + 0,01"]
     },
     {

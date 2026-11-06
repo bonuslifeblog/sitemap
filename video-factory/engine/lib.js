@@ -215,7 +215,7 @@
         this.layout(sc).forEach((b, i) => {
           const st = b.at ?? (.3 + i * .45), p = easeOut(prog(t, st, 1.1)), cx = b.x + b.w / 2;
           const val = b.value * p;
-          text(b.prefix ? b.prefix + fmt(val, b.dec ?? 0) : fmt(val, b.dec ?? 0, b.suffix || ''), cx, b.base - b.h * p - 60, { size: 84, alpha: clamp(p * 4), color: i ? THEME.accent : '#fff' });
+          text(b.prefix ? b.prefix + fmt(val, b.dec ?? 0) : fmt(val, b.dec ?? 0, b.suffix || ''), cx, b.base - b.h * p - 60, { size: 84, alpha: clamp(p * 4), color: i ? THEME.accent : '#fff', maxW: b.w + 120 });
           mono(b.label, cx, b.base + 50, { color: '#fff', size: 28, alpha: prog(t, st - .1, .4) });
           if (b.sub) mono(b.sub, cx, b.base + 92, { size: 22, alpha: prog(t, st + .1, .4) });
         });
