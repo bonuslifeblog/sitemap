@@ -242,22 +242,18 @@
     BEATS.forEach((b, i) => { b.end = i + 1 < BEATS.length ? BEATS[i + 1].abs : EP.duration; b.shapeObj = SHAPES[(b.shape || { kind: 'dust' }).kind](b.shape || {}, b); });
     // ---- desenho de som: cada batida gera seus efeitos; os impactos também tremem a tela ----
     CUES = []; IMPACTS = [];
-    const LEAD = .26; // o baque (transit/boom) atinge o pico 0,26 s depois do início do arquivo
     BEATS.forEach((b, i) => {
       if (b.sfx === false) return;
-      const sceneStart = i > 0 && BEATS[i - 1].sc !== b.sc;
-      if (sceneStart && b.transit !== false) { CUES.push({ t: b.abs - LEAD, sfx: 'transit', gain: .85 }); IMPACTS.push({ t: b.abs, amp: .7, pan: true }); }
-      else if (i > 0) CUES.push({ t: b.abs, sfx: 'whoosh', gain: b.via === 'burst' ? .7 : .4 });
+      if (i > 0) CUES.push({ t: b.abs, sfx: 'whoosh', gain: b.via === 'burst' ? .6 : .35 });
       const ctr = b.sub && typeof b.sub === 'object' ? b.sub : null;
       if (ctr) CUES.push({ t: b.abs + (ctr.delay ?? 0), sfx: 'tickroll', dur: ctr.dur ?? 1, gain: .8 });
       if (b.pop) CUES.push({ t: b.abs + (b.pop === true ? .45 : b.pop), sfx: 'pop', gain: .9 });
       if (b.card) CUES.push({ t: b.abs + (b.card.at ?? 0) + .05, sfx: 'pop', gain: .7 }, { t: b.abs + (b.card.at ?? 0) + 1.1, sfx: 'pop', gain: 1 });
+      // grave das revelações (bass.wav): nota que cai de 100 para 45 Hz e sustenta ~0,8 s
       if (b.impact) {
         const at = b.impactAt ?? (ctr ? (ctr.delay ?? 0) + (ctr.dur ?? 1) : Math.min(.9, (b.dur ?? .9) * .75 + .1)), t = b.abs + at;
-        if (b.impact === 'boom') CUES.push({ t: t - LEAD, sfx: 'boom', gain: 1 });
-        else CUES.push({ t, sfx: 'hit', gain: .28 });
-        if (b.impact === 'boom' && b.riser) CUES.push({ t: Math.max(0, t - 1.15), sfx: 'riser', gain: .6, end: t - LEAD });
-        IMPACTS.push({ t, amp: b.impact === 'boom' ? 1 : .55 });
+        CUES.push({ t: t - .04, sfx: 'bass', gain: b.impact === 'boom' ? 1 : .85, bass: true });
+        IMPACTS.push({ t, amp: b.impact === 'boom' ? 1 : .6 });
       }
     });
   }

@@ -77,8 +77,8 @@ console.log(`duração: ${cursor.toFixed(1)}s, ${ep.scenes.length} cenas`);
     filters.push(f); fxL.push(`[x${n}]`); n++;
   }
   if (fxL.length) filters.push(`${fxL.join('')}amix=inputs=${fxL.length}:normalize=0[fx]`);
-  const booms = cues.filter(c => c.sfx === 'boom').map(c => c.t);
-  const dip = booms.length ? `,volume='if(${booms.map(t => `between(t,${(t - .35).toFixed(2)},${(t + 1.2).toFixed(2)})`).join('+')},0.35,1)':eval=frame` : '';
+  const booms = cues.filter(c => c.bass).map(c => c.t);
+  const dip = booms.length ? `,volume='if(${booms.map(t => `between(t,${(t - .1).toFixed(2)},${(t + 1.1).toFixed(2)})`).join('+')},0.35,1)':eval=frame` : '';
   const music = ['music.wav', 'music.mp3'].map(f => path.join(epDir, 'audio', f)).find(fs.existsSync);
   const busIn = ['[vo1]', fxL.length ? '[fx]' : null].filter(Boolean);
   filters.push(`[vo]asplit=2[vo1][vo2]`);

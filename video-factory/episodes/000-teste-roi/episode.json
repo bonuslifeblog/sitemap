@@ -76,8 +76,7 @@
             "color": "gold"
           },
           "via": "burst",
-          "dur": 1.1,
-          "impact": "hit"
+          "dur": 1.1
         },
         {
           "at": 6.85,
@@ -98,8 +97,7 @@
           "dur": 0.35,
           "stagger": 0.05,
           "impact": "hit",
-          "impactAt": 0.05,
-          "riser": false
+          "impactAt": 0.05
         }
       ]
     },
@@ -177,8 +175,7 @@
               "color": "dim",
               "from": "start"
             }
-          },
-          "impact": "hit"
+          }
         }
       ]
     },
@@ -203,8 +200,7 @@
             "count": 3,
             "h": 300,
             "color": "gold"
-          },
-          "impact": "hit"
+          }
         },
         {
           "at": 1.7,
@@ -269,8 +265,7 @@
                 }
               }
             ]
-          },
-          "transit": false
+          }
         },
         {
           "at": 1.9,
