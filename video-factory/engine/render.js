@@ -66,14 +66,14 @@ console.log(`duração: ${cursor.toFixed(1)}s, ${ep.scenes.length} cenas`);
     args.push('-i', sc.audio); const ms = Math.round((sc.start + sc.voStart) * 1000);
     filters.push(`[${n}:a]aresample=48000,adelay=${ms}|${ms},apad[v${n}]`); voL.push(`[v${n}]`); n++;
   }
-  filters.push(`${voL.join('')}amix=inputs=${voL.length}:normalize=0,highpass=f=95,equalizer=f=3000:t=q:w=1:g=2,acompressor=threshold=0.12:ratio=3:attack=8:release=120,volume=${ep.voiceGain ?? 1.0}[vo]`);
+  filters.push(`${voL.join('')}amix=inputs=${voL.length}:normalize=0,highpass=f=65,equalizer=f=170:t=q:w=1.2:g=3,equalizer=f=3200:t=q:w=1.5:g=3.5,acompressor=threshold=0.1:ratio=3.5:attack=6:release=150:makeup=1.5,volume=${ep.voiceGain ?? 1.0}[vo]`);
   for (const c of cues) {
     args.push('-i', path.join(SFX, c.sfx + '.wav'));
     const ms = Math.max(0, Math.round(c.t * 1000));
     let f = `[${n}:a]aresample=48000`;
     if (c.dur) f += `,atrim=0:${c.dur.toFixed(2)},afade=t=out:st=${Math.max(0, c.dur - .12).toFixed(2)}:d=0.12`;
     if (c.end) f += `,atrim=0:${(c.end - c.t).toFixed(2)}`;
-    f += `,volume=${(c.gain * (ep.sfxGain ?? 1)).toFixed(2)},adelay=${ms}|${ms},apad[x${n}]`;
+    f += `,volume=${(c.gain * (ep.sfxGain ?? 0.7)).toFixed(2)},adelay=${ms}|${ms},apad[x${n}]`;
     filters.push(f); fxL.push(`[x${n}]`); n++;
   }
   if (fxL.length) filters.push(`${fxL.join('')}amix=inputs=${fxL.length}:normalize=0[fx]`);
@@ -88,7 +88,7 @@ console.log(`duração: ${cursor.toFixed(1)}s, ${ep.scenes.length} cenas`);
     filters.push(`[m][vo2]sidechaincompress=threshold=0.03:ratio=8:attack=20:release=400[md]`);
     busIn.push('[md]');
   } else filters.push(`[vo2]anullsink`);
-  filters.push(`${busIn.join('')}amix=inputs=${busIn.length}:normalize=0,alimiter=limit=0.95:attack=2:release=60,loudnorm=I=-14:TP=-1.2:LRA=11[a]`);
+  filters.push(`${busIn.join('')}amix=inputs=${busIn.length}:normalize=0,alimiter=limit=0.95:attack=2:release=60,loudnorm=I=-14:TP=-1.2:LRA=11,aresample=48000[a]`);
   const final = path.join(outDir, `${slug}.mp4`);
   args.push('-filter_complex', filters.join(';'), '-map', '0:v', '-map', '[a]', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-t', ep.duration.toFixed(2), '-movflags', '+faststart', final);
   execFileSync('ffmpeg', args, { stdio: 'inherit' });
