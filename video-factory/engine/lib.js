@@ -54,6 +54,8 @@
     cursor(c, x, y, s) { c.beginPath(); c.moveTo(x - .25 * s, y - .45 * s); c.lineTo(x + .3 * s, y + .1 * s); c.lineTo(x + .02 * s, y + .12 * s); c.lineTo(x + .2 * s, y + .45 * s); c.lineTo(x + .08 * s, y + .5 * s); c.lineTo(x - .08 * s, y + .17 * s); c.lineTo(x - .25 * s, y + .33 * s); c.closePath(); c.fill(); },
     search(c, x, y, s) { c.lineWidth = .11 * s; c.beginPath(); c.arc(x - .08 * s, y - .08 * s, .28 * s, 0, 7); c.stroke(); c.lineWidth = .14 * s; c.lineCap = 'round'; c.beginPath(); c.moveTo(x + .14 * s, y + .14 * s); c.lineTo(x + .4 * s, y + .4 * s); c.stroke(); },
     chart(c, x, y, s) { const w = .16 * s; [[-.33, .3], [-.11, .5], [.11, .7], [.33, .95]].forEach(([dx, h]) => c.fillRect(x + dx * s - w / 2, y + .45 * s - h * s * .9, w, h * s * .9)); },
+    moon(c, x, y, s) { c.beginPath(); c.arc(x, y, .42 * s, 0, 7); c.fill(); c.globalCompositeOperation = 'destination-out'; c.beginPath(); c.arc(x + .2 * s, y - .12 * s, .36 * s, 0, 7); c.fill(); c.globalCompositeOperation = 'source-over'; },
+    clock(c, x, y, s) { c.lineWidth = .08 * s; c.beginPath(); c.arc(x, y, .42 * s, 0, 7); c.stroke(); c.lineCap = 'round'; c.lineWidth = .07 * s; c.beginPath(); c.moveTo(x, y); c.lineTo(x, y - .28 * s); c.moveTo(x, y); c.lineTo(x + .2 * s, y + .08 * s); c.stroke(); },
     box(c, x, y, s) { const a = .42 * s; c.beginPath(); c.moveTo(x, y - a); c.lineTo(x + a, y - a / 2); c.lineTo(x, y); c.lineTo(x - a, y - a / 2); c.closePath(); c.fill(); c.beginPath(); c.moveTo(x - a, y - a / 2 + 6); c.lineTo(x - 4, y + 6); c.lineTo(x - 4, y + a); c.lineTo(x - a, y + a / 2); c.closePath(); c.fill(); c.beginPath(); c.moveTo(x + a, y - a / 2 + 6); c.lineTo(x + 4, y + 6); c.lineTo(x + 4, y + a); c.lineTo(x + a, y + a / 2); c.closePath(); c.fill(); },
   };
 
@@ -244,7 +246,9 @@
     CUES = []; IMPACTS = [];
     BEATS.forEach((b, i) => {
       if (b.sfx === false) return;
-      if (i > 0) CUES.push({ t: b.abs, sfx: 'whoosh', gain: b.via === 'burst' ? .6 : .35 });
+      const camMove = b.camera && BEATS.slice(0, i).some(p => p.camera);
+      if (i > 0) CUES.push({ t: b.abs, sfx: 'whoosh', gain: camMove ? .9 : b.via === 'burst' ? .6 : .35 });
+      (b.pins || []).forEach(p => CUES.push({ t: b.abs + (p.at ?? .5), sfx: 'pop', gain: .55 }));
       const ctr = b.sub && typeof b.sub === 'object' ? b.sub : null;
       if (ctr) CUES.push({ t: b.abs + (ctr.delay ?? 0), sfx: 'tickroll', dur: ctr.dur ?? 1, gain: .8 });
       if (b.pop) CUES.push({ t: b.abs + (b.pop === true ? .45 : b.pop), sfx: 'pop', gain: .9 });
@@ -273,6 +277,7 @@
     // fundo
     const g = ctx.createRadialGradient(W / 2, H * .45, 60, W / 2, H * .45, H * .8); g.addColorStop(0, TH.bg2); g.addColorStop(1, TH.bg);
     ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    const cam = window.MAP && window.MAP.ready ? window.MAP.draw(ctx, T, BEATS, curBeat) : null;
     const env = impactEnv(T);
     ctx.save();
     const pan = panOffset(T);
@@ -282,6 +287,7 @@
     drawParticles(T, mb);
     ctx.filter = 'none'; ctx.restore();
     if (env > .01) { const fg = ctx.createRadialGradient(W / 2, H * .5, 0, W / 2, H * .5, H * .6); fg.addColorStop(0, `rgba(255,236,190,${.16 * env})`); fg.addColorStop(1, 'rgba(255,236,190,0)'); ctx.fillStyle = fg; ctx.fillRect(0, 0, W, H); }
+    if (cam) window.MAP.overlay(ctx, T, BEATS, curBeat, cam);
     // cabeçalho
     mono(EP.header || '', W / 2, 96, { size: 21, spacing: 6, alpha: .75 });
     ctx.save(); ctx.globalAlpha = .18; ctx.fillStyle = '#fff'; ctx.fillRect(90, 128, W - 180, 1); ctx.restore();
@@ -318,4 +324,5 @@
     return { frames: Math.ceil(ep.duration * FPS), fps: FPS };
   }
   window.ENGINE = { init, frame, cues: () => CUES };
+  window.ENGINE_UTIL = { ease, easeOut, prog, clamp, text, mono, rr, mulberry, theme: () => TH };
 })();

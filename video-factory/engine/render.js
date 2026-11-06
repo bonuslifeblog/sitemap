@@ -36,6 +36,7 @@ console.log(`duração: ${cursor.toFixed(1)}s, ${ep.scenes.length} cenas`);
   const page = await browser.newPage({ viewport: { width: 1080, height: 1920 } });
   page.on('pageerror', e => { console.error('ERRO NA PÁGINA:', e.message); process.exit(1); });
   await page.goto('file://' + path.join(ROOT, 'engine', 'page.html'));
+  if (ep.map) await page.evaluate(w => window.MAP.load(w), JSON.parse(fs.readFileSync(path.join(ROOT, 'node_modules/world-atlas/countries-50m.json'), 'utf8')));
   const { frames, fps } = await page.evaluate(e => window.ENGINE.init(e), ep);
   const cues = await page.evaluate(() => window.ENGINE.cues ? window.ENGINE.cues() : []);
   console.log(`${cues.length} efeitos sonoros`);

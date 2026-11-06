@@ -1,0 +1,326 @@
+{
+  "header": "@OSERGIOCARVALHO · GOOGLE ADS · 6 NOV 2026",
+  "handle": "@osergiocarvalho",
+  "name": "Sérgio Carvalho",
+  "map": true,
+  "subtitles": true,
+  "accentWords": [
+    "brasília",
+    "york",
+    "angeles",
+    "conta",
+    "não",
+    "deles"
+  ],
+  "coverAt": 4.0,
+  "musicGain": 0.32,
+  "gap": 0.3,
+  "voCuts": [
+    5.95,
+    12.35,
+    19.42
+  ],
+  "scenes": [
+    {
+      "vo": "São onze da noite em Brasília. Você pausa os anúncios e vai dormir.",
+      "beats": [
+        {
+          "title": "23:00 EM BRASÍLIA",
+          "caption": "HORÁRIO DE BRASÍLIA · UTC−3",
+          "camera": {
+            "lon": -50,
+            "lat": -13,
+            "zoom": 22
+          },
+          "highlight": [
+            "Brazil"
+          ],
+          "pins": [
+            {
+              "lon": -47.93,
+              "lat": -15.78,
+              "label": "BRASÍLIA",
+              "value": "23:00",
+              "at": 1.0
+            }
+          ],
+          "shape": {
+            "kind": "dust"
+          },
+          "impact": "hit",
+          "impactAt": 1.4
+        },
+        {
+          "at": 2.6,
+          "title": "ANÚNCIOS PAUSADOS",
+          "caption": "PROGRAMAÇÃO ATÉ AS 23:00",
+          "camera": {
+            "lon": -50,
+            "lat": -13,
+            "zoom": 22
+          },
+          "highlight": [
+            "Brazil"
+          ],
+          "pins": [
+            {
+              "lon": -47.93,
+              "lat": -15.78,
+              "label": "BRASÍLIA",
+              "value": "23:00",
+              "at": 0
+            }
+          ],
+          "shape": {
+            "kind": "icon",
+            "name": "moon",
+            "y": 640,
+            "size": 230,
+            "color": "white"
+          }
+        }
+      ]
+    },
+    {
+      "vo": "Em Nova York, ainda são nove da noite. Em Los Angeles, seis da tarde.",
+      "beats": [
+        {
+          "title": "NOVA YORK",
+          "caption": "HORÁRIO DO LESTE DOS EUA · UTC−5",
+          "camera": {
+            "lon": -80,
+            "lat": 39,
+            "zoom": 30
+          },
+          "camDur": 1.3,
+          "highlight": [
+            "United States of America"
+          ],
+          "pins": [
+            {
+              "lon": -74.0,
+              "lat": 40.71,
+              "label": "NOVA YORK",
+              "value": "21:00",
+              "at": 1.5
+            }
+          ],
+          "shape": {
+            "kind": "dust"
+          },
+          "impact": "hit",
+          "impactAt": 1.85
+        },
+        {
+          "at": 3.0,
+          "title": "LOS ANGELES",
+          "caption": "HORÁRIO DO PACÍFICO · UTC−8",
+          "camera": {
+            "lon": -114,
+            "lat": 36,
+            "zoom": 30
+          },
+          "highlight": [
+            "United States of America"
+          ],
+          "pins": [
+            {
+              "lon": -118.24,
+              "lat": 34.05,
+              "label": "LOS ANGELES",
+              "value": "18:00",
+              "at": 1.25
+            }
+          ],
+          "shape": {
+            "kind": "dust"
+          },
+          "impact": "hit",
+          "impactAt": 1.35
+        }
+      ]
+    },
+    {
+      "vo": "Só que o Google Ads segue o fuso da sua conta. Não o de quem compra.",
+      "beats": [
+        {
+          "title": "FUSO DA CONTA",
+          "caption": "O GOOGLE ADS PROGRAMA PELO FUSO DA CONTA",
+          "camera": {
+            "lon": -80,
+            "lat": 9,
+            "zoom": 12
+          },
+          "camDur": 1.3,
+          "highlight": [
+            "Brazil"
+          ],
+          "pins": [
+            {
+              "lon": -47.93,
+              "lat": -15.78,
+              "label": "SUA CONTA",
+              "value": "23:00",
+              "at": 1.9,
+              "below": true
+            }
+          ],
+          "shape": {
+            "kind": "dust"
+          },
+          "source": "AJUDA DO GOOGLE ADS · PROGRAMAÇÃO DE ANÚNCIOS"
+        },
+        {
+          "at": 4.0,
+          "title": "NÃO O DE QUEM COMPRA",
+          "caption": "QUANDO VOCÊ PAUSA ÀS 23:00, LÁ AINDA É CEDO",
+          "camera": {
+            "lon": -80,
+            "lat": 9,
+            "zoom": 12
+          },
+          "highlight": [
+            "Brazil",
+            "United States of America"
+          ],
+          "pins": [
+            {
+              "lon": -47.93,
+              "lat": -15.78,
+              "label": "SUA CONTA",
+              "value": "23:00",
+              "at": 0,
+              "below": true
+            },
+            {
+              "lon": -74.0,
+              "lat": 40.71,
+              "label": "NOVA YORK",
+              "value": "21:00",
+              "at": 0.3,
+              "below": true
+            },
+            {
+              "lon": -118.24,
+              "lat": 34.05,
+              "label": "LOS ANGELES",
+              "value": "18:00",
+              "at": 0.6,
+              "below": true
+            }
+          ],
+          "arc": {
+            "from": [
+              -47.93,
+              -15.78
+            ],
+            "to": [
+              -74.0,
+              40.71
+            ],
+            "at": 0.1
+          },
+          "shape": {
+            "kind": "dust"
+          },
+          "impact": "boom",
+          "impactAt": 0.9
+        }
+      ]
+    },
+    {
+      "vo": "Se você vende pros Estados Unidos, programe pelo relógio deles. Segue pra mais.",
+      "extra": 1.2,
+      "beats": [
+        {
+          "title": "PÚBLICO NOS EUA?",
+          "caption": "COMPARE O SEU RELÓGIO COM O DELES",
+          "camera": {
+            "lon": -97,
+            "lat": 38,
+            "zoom": 16
+          },
+          "camDur": 1.2,
+          "highlight": [
+            "United States of America"
+          ],
+          "pins": [
+            {
+              "lon": -74.0,
+              "lat": 40.71,
+              "label": "NOVA YORK",
+              "value": "21:00",
+              "at": 0.4
+            },
+            {
+              "lon": -118.24,
+              "lat": 34.05,
+              "label": "LOS ANGELES",
+              "value": "18:00",
+              "at": 0.7,
+              "below": true
+            }
+          ],
+          "shape": {
+            "kind": "dust"
+          }
+        },
+        {
+          "at": 2.3,
+          "title": "PROGRAME PELO FUSO DELES",
+          "caption": "OU AJUSTE OS HORÁRIOS PELA DIFERENÇA",
+          "camera": {
+            "lon": -97,
+            "lat": 38,
+            "zoom": 16
+          },
+          "highlight": [
+            "United States of America"
+          ],
+          "pins": [
+            {
+              "lon": -74.0,
+              "lat": 40.71,
+              "label": "NOVA YORK",
+              "value": "−2 H",
+              "at": 0.2
+            },
+            {
+              "lon": -118.24,
+              "lat": 34.05,
+              "label": "LOS ANGELES",
+              "value": "−5 H",
+              "at": 0.4,
+              "below": true
+            }
+          ],
+          "shape": {
+            "kind": "icon",
+            "name": "clock",
+            "y": 620,
+            "size": 200,
+            "color": "gold"
+          },
+          "impact": "hit",
+          "impactAt": 0.5
+        },
+        {
+          "at": 4.5,
+          "title": "SEGUE O PERFIL",
+          "caption": "MAIS GOOGLE ADS PRA QUEM VENDE LÁ FORA",
+          "map": false,
+          "shape": {
+            "kind": "icon",
+            "name": "person",
+            "y": 900,
+            "size": 420,
+            "color": "gold"
+          },
+          "card": {
+            "at": 0.3
+          }
+        }
+      ]
+    }
+  ]
+}
