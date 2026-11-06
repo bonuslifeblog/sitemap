@@ -8,7 +8,7 @@
   const glow = document.createElement('canvas'); glow.width = W; glow.height = H; const gctx = glow.getContext('2d');
   const off = document.createElement('canvas'); off.width = W; off.height = H; const octx = off.getContext('2d', { willReadFrequently: true });
 
-  let EP, TH, COLORS, BEATS = [];
+  let EP, TH, COLORS, BEATS = [], CUES = [], IMPACTS = [];
   // estado das partículas
   const px = new Float32Array(N), py = new Float32Array(N);         // posição atual
   const sx = new Float32Array(N), sy = new Float32Array(N);         // início do morph
@@ -240,7 +240,24 @@
     }));
     BEATS.sort((a, b) => a.abs - b.abs);
     BEATS.forEach((b, i) => { b.end = i + 1 < BEATS.length ? BEATS[i + 1].abs : EP.duration; b.shapeObj = SHAPES[(b.shape || { kind: 'dust' }).kind](b.shape || {}, b); });
+    // ---- desenho de som: cada batida gera seus efeitos; os impactos também tremem a tela ----
+    CUES = []; IMPACTS = [];
+    BEATS.forEach((b, i) => {
+      if (b.sfx === false) return;
+      if (i > 0) CUES.push({ t: b.abs, sfx: 'whoosh', gain: b.via === 'burst' ? .9 : .55 });
+      const ctr = b.sub && typeof b.sub === 'object' ? b.sub : null;
+      if (ctr) CUES.push({ t: b.abs + (ctr.delay ?? 0), sfx: 'tickroll', dur: ctr.dur ?? 1, gain: .8 });
+      if (b.pop) CUES.push({ t: b.abs + (b.pop === true ? .45 : b.pop), sfx: 'pop', gain: .9 });
+      if (b.card) CUES.push({ t: b.abs + (b.card.at ?? 0) + .05, sfx: 'pop', gain: .7 }, { t: b.abs + (b.card.at ?? 0) + 1.1, sfx: 'pop', gain: 1 });
+      if (b.impact) {
+        const at = b.impactAt ?? (ctr ? (ctr.delay ?? 0) + (ctr.dur ?? 1) : Math.min(.9, (b.dur ?? .9) * .75 + .1)), t = b.abs + at;
+        CUES.push({ t, sfx: b.impact, gain: b.impact === 'boom' ? 1 : .7 });
+        if (b.impact === 'boom' && b.riser !== false) CUES.push({ t: Math.max(0, t - 1.15), sfx: 'riser', gain: .8, end: t });
+        IMPACTS.push({ t, amp: b.impact === 'boom' ? 1 : .55 });
+      }
+    });
   }
+  function impactEnv(T) { let e = 0; for (const im of IMPACTS) if (T >= im.t && T < im.t + 1.2) e = Math.max(e, im.amp * Math.exp(-(T - im.t) * 7)); return e; }
   let last = -1, curBeat = -1;
   function frame(i) {
     if (i !== last + 1) throw new Error('quadros precisam ser sequenciais'); last = i;
@@ -252,7 +269,12 @@
     // fundo
     const g = ctx.createRadialGradient(W / 2, H * .45, 60, W / 2, H * .45, H * .8); g.addColorStop(0, TH.bg2); g.addColorStop(1, TH.bg);
     ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    const env = impactEnv(T);
+    ctx.save();
+    if (env > .01) { const r = mulberry(i * 31 + 7); ctx.translate((r() - .5) * 34 * env, (r() - .5) * 34 * env); ctx.translate(W / 2, H / 2); ctx.scale(1 + .035 * env, 1 + .035 * env); ctx.translate(-W / 2, -H / 2); }
     drawParticles(T);
+    ctx.restore();
+    if (env > .01) { const fg = ctx.createRadialGradient(W / 2, H * .5, 0, W / 2, H * .5, H * .6); fg.addColorStop(0, `rgba(255,236,190,${.16 * env})`); fg.addColorStop(1, 'rgba(255,236,190,0)'); ctx.fillStyle = fg; ctx.fillRect(0, 0, W, H); }
     // cabeçalho
     mono(EP.header || '', W / 2, 96, { size: 21, spacing: 6, alpha: .75 });
     ctx.save(); ctx.globalAlpha = .18; ctx.fillStyle = '#fff'; ctx.fillRect(90, 128, W - 180, 1); ctx.restore();
@@ -288,5 +310,5 @@
     build();
     return { frames: Math.ceil(ep.duration * FPS), fps: FPS };
   }
-  window.ENGINE = { init, frame };
+  window.ENGINE = { init, frame, cues: () => CUES };
 })();

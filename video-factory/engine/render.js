@@ -37,6 +37,8 @@ console.log(`duração: ${cursor.toFixed(1)}s, ${ep.scenes.length} cenas`);
   page.on('pageerror', e => { console.error('ERRO NA PÁGINA:', e.message); process.exit(1); });
   await page.goto('file://' + path.join(ROOT, 'engine', 'page.html'));
   const { frames, fps } = await page.evaluate(e => window.ENGINE.init(e), ep);
+  const cues = await page.evaluate(() => window.ENGINE.cues ? window.ENGINE.cues() : []);
+  console.log(`${cues.length} efeitos sonoros`);
 
   const silent = path.join(outDir, `${slug}.silent.mp4`);
   const ff = stills ? null : spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'mjpeg', '-i', '-',
@@ -56,23 +58,37 @@ console.log(`duração: ${cursor.toFixed(1)}s, ${ep.scenes.length} cenas`);
   await browser.close();
   console.log('\nvídeo sem áudio pronto');
 
-  // 2) mixagem: narrações posicionadas + música com ducking
+  // 2) mixagem: voz (sem graves) + efeitos + trilha com ducking (e respiro extra nos booms)
+  const SFX = path.join(ROOT, 'engine', 'sfx');
   const args = ['-y', '-loglevel', 'error', '-i', silent];
-  const filters = []; let n = 1; const voLabels = [];
+  const filters = []; let n = 1; const voL = [], fxL = [];
   for (const sc of ep.scenes) if (sc.audio) {
-    args.push('-i', sc.audio);
-    const ms = Math.round((sc.start + sc.voStart) * 1000);
-    filters.push(`[${n}:a]aresample=48000,adelay=${ms}|${ms},apad[v${n}]`); voLabels.push(`[v${n}]`); n++;
+    args.push('-i', sc.audio); const ms = Math.round((sc.start + sc.voStart) * 1000);
+    filters.push(`[${n}:a]aresample=48000,adelay=${ms}|${ms},apad[v${n}]`); voL.push(`[v${n}]`); n++;
   }
-  filters.push(`${voLabels.join('')}amix=inputs=${voLabels.length}:normalize=0,volume=${ep.voiceGain ?? 1.0}[vo]`);
+  filters.push(`${voL.join('')}amix=inputs=${voL.length}:normalize=0,highpass=f=95,equalizer=f=3000:t=q:w=1:g=2,acompressor=threshold=0.12:ratio=3:attack=8:release=120,volume=${ep.voiceGain ?? 1.0}[vo]`);
+  for (const c of cues) {
+    args.push('-i', path.join(SFX, c.sfx + '.wav'));
+    const ms = Math.max(0, Math.round(c.t * 1000));
+    let f = `[${n}:a]aresample=48000`;
+    if (c.dur) f += `,atrim=0:${c.dur.toFixed(2)},afade=t=out:st=${Math.max(0, c.dur - .12).toFixed(2)}:d=0.12`;
+    if (c.end) f += `,atrim=0:${(c.end - c.t).toFixed(2)}`;
+    f += `,volume=${(c.gain * (ep.sfxGain ?? 1)).toFixed(2)},adelay=${ms}|${ms},apad[x${n}]`;
+    filters.push(f); fxL.push(`[x${n}]`); n++;
+  }
+  if (fxL.length) filters.push(`${fxL.join('')}amix=inputs=${fxL.length}:normalize=0[fx]`);
+  const booms = cues.filter(c => c.sfx === 'boom').map(c => c.t);
+  const dip = booms.length ? `,volume='if(${booms.map(t => `between(t,${(t - .35).toFixed(2)},${(t + 1.2).toFixed(2)})`).join('+')},0.35,1)':eval=frame` : '';
   const music = ['music.wav', 'music.mp3'].map(f => path.join(epDir, 'audio', f)).find(fs.existsSync);
+  const busIn = ['[vo1]', fxL.length ? '[fx]' : null].filter(Boolean);
+  filters.push(`[vo]asplit=2[vo1][vo2]`);
   if (music) {
     args.push('-stream_loop', '-1', '-i', music);
-    filters.push(`[vo]asplit=2[vo1][vo2]`);
-    filters.push(`[${n}:a]aresample=48000,volume=${ep.musicGain ?? 0.35},afade=t=out:st=${(ep.duration - 1.5).toFixed(2)}:d=1.5[m]`);
+    filters.push(`[${n}:a]aresample=48000,volume=${ep.musicGain ?? 0.35}${dip},afade=t=out:st=${(ep.duration - 1.5).toFixed(2)}:d=1.5[m]`);
     filters.push(`[m][vo2]sidechaincompress=threshold=0.03:ratio=8:attack=20:release=400[md]`);
-    filters.push(`[vo1][md]amix=inputs=2:normalize=0,loudnorm=I=-14:TP=-1.5:LRA=11[a]`);
-  } else filters.push(`[vo]loudnorm=I=-14:TP=-1.5[a]`);
+    busIn.push('[md]');
+  } else filters.push(`[vo2]anullsink`);
+  filters.push(`${busIn.join('')}amix=inputs=${busIn.length}:normalize=0,alimiter=limit=0.95:attack=2:release=60,loudnorm=I=-14:TP=-1.2:LRA=11[a]`);
   const final = path.join(outDir, `${slug}.mp4`);
   args.push('-filter_complex', filters.join(';'), '-map', '0:v', '-map', '[a]', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-t', ep.duration.toFixed(2), '-movflags', '+faststart', final);
   execFileSync('ffmpeg', args, { stdio: 'inherit' });
