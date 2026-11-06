@@ -1,52 +1,71 @@
 {
-  "series": "TRÁFEGO PAGO · ANATOMIA DO ROI",
+  "header": "@OSERGIOCARVALHO · TRÁFEGO PAGO · 6 NOV 2026",
   "handle": "@osergiocarvalho",
-  "sources": "CÁLCULO: ROAS = RETORNO ÷ GASTO · ROI = (RETORNO − GASTO) ÷ GASTO",
+  "name": "Sérgio Carvalho",
   "subtitles": true,
-  "coverAt": 3.0,
-  "voice": "onwK4e9ZLuTAKqWW03F9",
+  "accentWords": ["roas", "roi", "lucro", "não"],
+  "coverAt": 6.0,
   "musicGain": 0.32,
   "gap": 0.3,
   "voCuts": [8.12, 16.24, 22.07],
   "scenes": [
     {
-      "type": "hook",
       "vo": "Ele gastou mil dólares em anúncios e recebeu mil e trezentos. Lucro de cento e trinta por cento? Não.",
-      "kicker": "TRÁFEGO PAGO",
-      "title": ["ANATOMIA", "DO ROI"],
-      "glyph": "%",
-      "lock": { "x": 540, "y": 1010, "at": 4.2, "label": "ERRO DETECTADO" },
-      "tags": ["130% ≠ LUCRO", "O PAINEL NÃO MENTE. A LEITURA, SIM."]
+      "beats": [
+        { "title": "GASTO", "sub": { "from": 0, "to": 1000, "prefix": "US$ ", "dur": 1.4 }, "caption": "INVESTIDO EM ANÚNCIOS",
+          "shape": { "kind": "grid", "name": "coin", "cols": 5, "rows": 3, "count": 10, "h": 560, "color": "white" },
+          "source": "CADA MOEDA = US$ 100", "dur": 1.2 },
+        { "at": 2.1, "title": "RETORNO", "sub": { "from": 1000, "to": 1300, "prefix": "US$ ", "dur": 1.0 }, "subColor": "gold", "caption": "O QUE VOLTOU EM VENDAS",
+          "shape": { "kind": "grid", "name": "coin", "cols": 5, "rows": 3, "count": 13, "h": 560, "color": "gold" },
+          "source": "CADA MOEDA = US$ 100" },
+        { "at": 4.6, "title": "LUCRO DE 130%?", "caption": "1.300 ÷ 1.000 = 1,3",
+          "shape": { "kind": "text", "text": "130%", "size": 360, "color": "gold" }, "via": "burst", "dur": 1.1 },
+        { "at": 6.85, "title": "NÃO.", "caption": "ERRO DE LEITURA DO PAINEL",
+          "shape": { "kind": "text", "text": "130%", "size": 360, "color": "alert" },
+          "lock": { "y": 960, "size": 560, "at": 0.05, "label": "ERRO DETECTADO" }, "dur": 0.35, "stagger": 0.05 }
+      ]
     },
     {
-      "type": "bars",
       "vo": "Mil e trezentos sobre mil é o ROAS. Mede o retorno bruto, não o lucro.",
-      "caption": "ROAS = RETORNO ÷ GASTO",
-      "headline": "O ROAS",
-      "items": [
-        { "label": "GASTO", "value": 1000, "dec": 0, "prefix": "US$ ", "color": "white", "at": 0.3 },
-        { "label": "RETORNO", "value": 1300, "dec": 0, "prefix": "US$ ", "color": "gold", "at": 0.9 }
-      ],
-      "chips": ["ROAS 1,3 · RETORNO BRUTO"],
-      "chipsAt": 2.4
+      "beats": [
+        { "title": "1.300 ÷ 1.000", "caption": "RETORNO ÷ GASTO",
+          "shape": { "kind": "bars", "orient": "v", "items": [
+            { "label": "GASTO", "value": 1000, "prefix": "US$ ", "color": "white" },
+            { "label": "RETORNO", "value": 1300, "prefix": "US$ ", "color": "gold" } ] } },
+        { "at": 1.9, "title": "ROAS", "sub": "1,3", "subColor": "gold", "caption": "RETORNO SOBRE O GASTO COM ANÚNCIO",
+          "shape": { "kind": "text", "text": "1,3", "size": 460, "color": "gold" },
+          "source": "FÓRMULA · ROAS = RETORNO ÷ GASTO" },
+        { "at": 3.1, "title": "retorno bruto", "serif": true, "caption": "TUDO QUE ENTROU",
+          "shape": { "kind": "grid", "name": "coin", "cols": 5, "rows": 3, "count": 13, "h": 560, "color": "gold" }, "via": "burst" },
+        { "at": 4.9, "title": "NÃO O LUCRO", "sub": "10 + 3", "caption": "10 DE CADA 13 MOEDAS PAGAM O ANÚNCIO",
+          "shape": { "kind": "grid", "name": "coin", "cols": 5, "rows": 3, "count": 13, "h": 560, "color": "gold",
+            "highlight": { "count": 10, "color": "dim", "from": "start" } } }
+      ]
     },
     {
-      "type": "price",
       "vo": "O lucro é trezentos. Trezentos sobre mil: ROI de trinta por cento.",
-      "caption": "ROI = (RETORNO − GASTO) ÷ GASTO",
-      "formula": "(1.300 − 1.000) ÷ 1.000",
-      "result": "30%",
-      "compareAt": 3.2,
-      "compare": { "from": 130, "to": 30, "labelFrom": "O QUE ELE ACHOU · 130%", "labelTo": "O LUCRO REAL · 30%", "delta": "ROI 30%" },
-      "chips": ["LUCRO = 1.300 − 1.000 = US$ 300"]
+      "beats": [
+        { "title": "LUCRO", "sub": { "from": 0, "to": 300, "prefix": "US$ ", "dur": 1.0 }, "subColor": "gold", "caption": "O QUE SOBRA DEPOIS DO ANÚNCIO",
+          "shape": { "kind": "grid", "name": "coin", "cols": 3, "rows": 1, "count": 3, "h": 300, "color": "gold" } },
+        { "at": 1.7, "title": "300 ÷ 1.000", "caption": "LUCRO ÷ GASTO",
+          "shape": { "kind": "text", "text": "300 ÷ 1.000", "size": 170, "color": "white" } },
+        { "at": 3.1, "title": "ROI", "sub": { "from": 0, "to": 30, "suffix": "%", "dur": 0.9 }, "subColor": "gold", "caption": "RETORNO SOBRE O INVESTIMENTO",
+          "shape": { "kind": "text", "text": "30%", "size": 400, "color": "gold" },
+          "source": "FÓRMULA · ROI = (RETORNO − GASTO) ÷ GASTO" }
+      ]
     },
     {
-      "type": "outro",
       "vo": "ROAS não é lucro. Segue, pra não se enganar com o painel.",
-      "lines": ["ROAS", "NÃO É LUCRO"],
-      "cta": "SEGUE PRA LER O PAINEL CERTO",
-      "spiralAt": 2.7,
-      "extra": 1.4
+      "extra": 1.4,
+      "beats": [
+        { "title": "ROAS ≠ LUCRO", "caption": "O MESMO PAINEL, DUAS LEITURAS",
+          "shape": { "kind": "bars", "orient": "h", "max": 130, "items": [
+            { "label": "O QUE PARECIA", "value": 130, "suffix": "%", "color": "white" },
+            { "label": "O QUE SOBROU", "value": 30, "suffix": "%", "color": "gold", "cut": { "value": 100, "label": "CUSTO DO ANÚNCIO", "at": 0.8 } } ] } },
+        { "at": 1.9, "title": "SEGUE O PERFIL", "caption": "PRA LER O PAINEL DO JEITO CERTO",
+          "shape": { "kind": "icon", "name": "person", "y": 900, "size": 420, "color": "gold" },
+          "card": { "at": 0.4 } }
+      ]
     }
   ]
 }
