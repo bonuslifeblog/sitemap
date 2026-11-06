@@ -152,7 +152,7 @@
       if (u > .5) sc0[i] = tc[i];
     }
   }
-  function drawParticles(T) {
+  function drawParticles(T, mb = 0) {
     gctx.clearRect(0, 0, W, H);
     for (let c = 0; c < COLORS.length; c++) {
       gctx.fillStyle = COLORS[c];
@@ -164,8 +164,8 @@
     }
     gctx.globalAlpha = 1;
     ctx.save(); ctx.globalCompositeOperation = 'lighter';
-    ctx.filter = 'blur(6px)'; ctx.globalAlpha = .75; ctx.drawImage(glow, 0, 0);
-    ctx.filter = 'none'; ctx.globalAlpha = 1; ctx.drawImage(glow, 0, 0); ctx.restore();
+    ctx.filter = `blur(${6 + mb}px)`; ctx.globalAlpha = .75; ctx.drawImage(glow, 0, 0);
+    ctx.filter = mb ? `blur(${mb}px)` : 'none'; ctx.globalAlpha = 1; ctx.drawImage(glow, 0, 0); ctx.restore();
   }
 
   // ---------- tipografia ----------
@@ -242,22 +242,30 @@
     BEATS.forEach((b, i) => { b.end = i + 1 < BEATS.length ? BEATS[i + 1].abs : EP.duration; b.shapeObj = SHAPES[(b.shape || { kind: 'dust' }).kind](b.shape || {}, b); });
     // ---- desenho de som: cada batida gera seus efeitos; os impactos também tremem a tela ----
     CUES = []; IMPACTS = [];
+    const LEAD = .26; // o baque (transit/boom) atinge o pico 0,26 s depois do início do arquivo
     BEATS.forEach((b, i) => {
       if (b.sfx === false) return;
-      if (i > 0) CUES.push({ t: b.abs, sfx: 'whoosh', gain: b.via === 'burst' ? .9 : .55 });
+      const sceneStart = i > 0 && BEATS[i - 1].sc !== b.sc;
+      if (sceneStart && b.transit !== false) { CUES.push({ t: b.abs - LEAD, sfx: 'transit', gain: .85 }); IMPACTS.push({ t: b.abs, amp: .7, pan: true }); }
+      else if (i > 0) CUES.push({ t: b.abs, sfx: 'whoosh', gain: b.via === 'burst' ? .7 : .4 });
       const ctr = b.sub && typeof b.sub === 'object' ? b.sub : null;
       if (ctr) CUES.push({ t: b.abs + (ctr.delay ?? 0), sfx: 'tickroll', dur: ctr.dur ?? 1, gain: .8 });
       if (b.pop) CUES.push({ t: b.abs + (b.pop === true ? .45 : b.pop), sfx: 'pop', gain: .9 });
       if (b.card) CUES.push({ t: b.abs + (b.card.at ?? 0) + .05, sfx: 'pop', gain: .7 }, { t: b.abs + (b.card.at ?? 0) + 1.1, sfx: 'pop', gain: 1 });
       if (b.impact) {
         const at = b.impactAt ?? (ctr ? (ctr.delay ?? 0) + (ctr.dur ?? 1) : Math.min(.9, (b.dur ?? .9) * .75 + .1)), t = b.abs + at;
-        CUES.push({ t, sfx: b.impact, gain: b.impact === 'boom' ? 1 : .7 });
-        if (b.impact === 'boom' && b.riser !== false) CUES.push({ t: Math.max(0, t - 1.15), sfx: 'riser', gain: .8, end: t });
+        if (b.impact === 'boom') CUES.push({ t: t - LEAD, sfx: 'boom', gain: 1 });
+        else CUES.push({ t, sfx: 'hit', gain: .28 });
+        if (b.impact === 'boom' && b.riser) CUES.push({ t: Math.max(0, t - 1.15), sfx: 'riser', gain: .6, end: t - LEAD });
         IMPACTS.push({ t, amp: b.impact === 'boom' ? 1 : .55 });
       }
     });
   }
-  function impactEnv(T) { let e = 0; for (const im of IMPACTS) if (T >= im.t && T < im.t + 1.2) e = Math.max(e, im.amp * Math.exp(-(T - im.t) * 7)); return e; }
+  function panOffset(T) { // "câmera" passa rápido: sobe e sai, entra por baixo e assenta
+    for (const im of IMPACTS) if (im.pan) { const a = T - (im.t - .22); if (a >= 0 && a < .75) { return a < .22 ? -260 * ease(a / .22) : 260 * (1 - easeOut((a - .22) / .53)); } }
+    return 0;
+  }
+  function impactEnv(T) { let e = 0; for (const im of IMPACTS) if (!im.pan && T >= im.t && T < im.t + 1.2) e = Math.max(e, im.amp * Math.exp(-(T - im.t) * 7)); return e; }
   let last = -1, curBeat = -1;
   function frame(i) {
     if (i !== last + 1) throw new Error('quadros precisam ser sequenciais'); last = i;
@@ -271,9 +279,12 @@
     ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
     const env = impactEnv(T);
     ctx.save();
+    const pan = panOffset(T);
+    const mb = Math.min(6, Math.abs(pan) / 40);
+    if (Math.abs(pan) > .5) ctx.translate(0, pan);
     if (env > .01) { const r = mulberry(i * 31 + 7); ctx.translate((r() - .5) * 34 * env, (r() - .5) * 34 * env); ctx.translate(W / 2, H / 2); ctx.scale(1 + .035 * env, 1 + .035 * env); ctx.translate(-W / 2, -H / 2); }
-    drawParticles(T);
-    ctx.restore();
+    drawParticles(T, mb);
+    ctx.filter = 'none'; ctx.restore();
     if (env > .01) { const fg = ctx.createRadialGradient(W / 2, H * .5, 0, W / 2, H * .5, H * .6); fg.addColorStop(0, `rgba(255,236,190,${.16 * env})`); fg.addColorStop(1, 'rgba(255,236,190,0)'); ctx.fillStyle = fg; ctx.fillRect(0, 0, W, H); }
     // cabeçalho
     mono(EP.header || '', W / 2, 96, { size: 21, spacing: 6, alpha: .75 });

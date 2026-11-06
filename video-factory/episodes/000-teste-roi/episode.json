@@ -97,7 +97,7 @@
           },
           "dur": 0.35,
           "stagger": 0.05,
-          "impact": "boom",
+          "impact": "hit",
           "impactAt": 0.05,
           "riser": false
         }
@@ -269,7 +269,8 @@
                 }
               }
             ]
-          }
+          },
+          "transit": false
         },
         {
           "at": 1.9,
