@@ -1,5 +1,7 @@
 # Fábrica de vídeos — estilo "Anatomia"
 
+> Estrutura: `engine/` é a fábrica (compartilhada); cada canal fica em `channels/<canal>/` com `channel.json` (identidade: cores, @, nome, tema), `CLAUDE.md` (regras do canal) e `episodes/`. Os vídeos saem em `out/<canal>/`.
+
 Fábrica de Reels/Shorts 9:16 com **visualização de dados em partículas** (fundo preto, partículas brancas e douradas, mira vermelha, números grandes e narração calma e investigativa), feita para o nicho de **afiliados + tráfego pago (Google Ads, gringa)**.
 
 Referência: reel "Binance · Anatomía del golpe" (85 s, 8 cenas). O que faz esse formato funcionar:
@@ -16,19 +18,19 @@ Referência: reel "Binance · Anatomía del golpe" (85 s, 8 cenas). O que faz es
 ## Como produzir um episódio
 
 ```bash
-# 1. roteiro: episodes/<slug>/episode.json, com o texto falado de cada cena em "vo" (ver ROTEIRO.md)
-# 2. voz: UM arquivo com a narração inteira em episodes/<slug>/audio/voice.mp3
+# 1. roteiro: channels/<canal>/episodes/<slug>/episode.json, com o texto falado de cada cena em "vo" (ver ROTEIRO.md)
+# 2. voz: UM arquivo com a narração inteira em channels/<canal>/episodes/<slug>/audio/voice.mp3
 #    ("voice": "audio/voice.mp3" no episode.json). A voz NUNCA é cortada nem acelerada.
 #    Trilha opcional: audio/music.mp3
 
 # 3. alinhamento roteiro × voz (roda sozinho no render; rode à mão para conferir)
-node engine/align.js episodes/<slug>        # → timing.json com o tempo de cada frase e palavra
+node engine/align.js channels/<canal>/episodes/<slug>        # → timing.json com o tempo de cada frase e palavra
 
 # 4. conferir o visual antes do render longo: 1 quadro por segundo + folha de quadros
-node engine/render.js episodes/<slug> --stills   # → out/<slug>-folha.jpg
+node engine/render.js channels/<canal>/episodes/<slug> --stills   # → out/<slug>-folha.jpg
 
 # 5. render final + controle de qualidade automático
-node engine/render.js episodes/<slug>           # → out/<slug>.mp4, -capa.jpg, -qa.jpg
+node engine/render.js channels/<canal>/episodes/<slug>           # → out/<slug>.mp4, -capa.jpg, -qa.jpg
 ```
 
 **Alinhamento:** sem reconhecimento de fala. O `align.js` detecta os trechos de fala e silêncio e, por programação dinâmica, decide onde termina cada frase do roteiro. Ele casa o número de sílabas com a duração da fala, prefere cortes em pausas longas e evita fim de frase no meio da fala. Os cortes dos episódios 000 e 002 bateram com a análise manual.

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* Uso: node engine/render.js episodes/001-leilao-google [--preview]
+/* Uso: node engine/render.js channels/<canal>/episodes/<slug> [--stills]
  * Lê episode.json + audio/NN.mp3 (uma narração por cena) + audio/music.(wav|mp3) opcional
  * e gera out/<slug>.mp4 (1080x1920, 30 fps) + out/<slug>-capa.jpg */
 const { chromium } = require('playwright');
@@ -10,9 +10,19 @@ const ROOT = path.resolve(__dirname, '..');
 const epDir = path.resolve(process.argv[2] || '');
 const preview = process.argv.includes('--preview');
 const stills = process.argv.includes('--stills'); // salva 1 quadro por segundo + folha de quadros, sem gerar vídeo
-const ep = JSON.parse(fs.readFileSync(path.join(epDir, 'episode.json'), 'utf8'));
-const slug = path.basename(epDir);
-const outDir = path.join(ROOT, 'out'); fs.mkdirSync(outDir, { recursive: true });
+const ep0 = JSON.parse(fs.readFileSync(path.join(epDir, 'episode.json'), 'utf8'));
+// identidade do canal: channels/<canal>/channel.json (cores, @, nome) vale para todos os episódios dele;
+// o que o episode.json definir por cima tem prioridade
+let chDir = epDir; while (chDir !== path.dirname(chDir) && !fs.existsSync(path.join(chDir, 'channel.json'))) chDir = path.dirname(chDir);
+const ch = fs.existsSync(path.join(chDir, 'channel.json')) ? JSON.parse(fs.readFileSync(path.join(chDir, 'channel.json'), 'utf8')) : {};
+const ep = { ...ch, ...ep0, theme: { ...(ch.theme || {}), ...(ep0.theme || {}) } };
+const slug = path.basename(epDir), channel = ch.handle ? path.basename(chDir) : '';
+const outDir = path.join(ROOT, 'out', channel); fs.mkdirSync(outDir, { recursive: true });
+console.log(`canal: ${channel || '(sem canal)'} · episódio: ${slug}`);
+if (!ep.header && ep.handle) { // cabeçalho padrão: @CANAL · TEMA · data de hoje
+  const d = new Date(), M = ['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
+  ep.header = `${ep.handle.toUpperCase()} · ${ep.topic || ''} · ${d.getDate()} ${M[d.getMonth()]} ${d.getFullYear()}`;
+}
 if (stills) fs.rmSync(path.join(outDir, 'stills'), { recursive: true, force: true });
 
 const probe = f => parseFloat(execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', f]).toString());

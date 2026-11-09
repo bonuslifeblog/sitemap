@@ -74,7 +74,7 @@
     const g = grids[li], dot = Math.max(1.6, Math.min(4.2, g.s * cam.z * .38));
     const x0 = -20, x1 = W + 20, y0 = -20, y1 = H + 20;
     for (let pass = 0; pass < 2; pass++) {
-      lctx.fillStyle = pass ? th.accent : '#59606e';
+      lctx.fillStyle = pass ? th.accent : (th.land || '#59606e');
       for (let i = 0; i < g.X.length; i++) {
         const x = W / 2 + (g.X[i] - cam.lon) * cam.z; if (x < x0 || x > x1) continue;
         const y = CY - (g.Y[i] - cam.Y) * cam.z; if (y < y0 || y > y1) continue;
