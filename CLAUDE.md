@@ -35,4 +35,6 @@ video-factory/
 - **Claude não ouve áudio:** o Sérgio confere o som de cada vídeo antes de postar.
 
 ## Pendências gerais
-- **Voz:** os créditos do vidIQ acabam (renovam todo dia 20). O plano é usar o ElevenLabs, de preferência com o endpoint que dá o tempo de cada palavra.
+- **Voz: usar o Voicebox, no Mac do Sérgio.** É um app local e gratuito de clonagem e narração (github.com/jamiepine/voicebox), com API local (provavelmente `http://localhost:17493`, docs em `/docs`; confirmar). Só conversas que rodam no Mac alcançam essa API. Próximo passo na conversa "Fábrica" (no Mac): testar a API, listar as vozes e criar `engine/voice.js`, que gera `audio/voice.mp3` a partir dos `scenes[].vo` do episódio. Vozes: a clonada do Sérgio para Afiliados e outra diferente para GTA 6. Alternativas: ElevenLabs (API com tempos por palavra) ou vidIQ (créditos renovam todo dia 20).
+- **Pull Request para o `main`:** todo o trabalho está no branch `claude/instagram-video-download-82p96b`. Conversas novas criadas na nuvem partem do `main`, que está vazio. Abrir o PR e o Sérgio aprovar.
+- **Episódio 001** (leilão do Google) ainda está no formato antigo.
