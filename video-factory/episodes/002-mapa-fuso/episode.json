@@ -14,12 +14,6 @@
   ],
   "coverAt": 4.0,
   "musicGain": 0.32,
-  "gap": 0.3,
-  "voCuts": [
-    5.95,
-    12.35,
-    19.42
-  ],
   "scenes": [
     {
       "vo": "São onze da noite em Brasília. Você pausa os anúncios e vai dormir.",
@@ -41,17 +35,16 @@
               "lat": -15.78,
               "label": "BRASÍLIA",
               "value": "23:00",
-              "at": 1.0
+              "word": "Brasília"
             }
           ],
           "shape": {
             "kind": "dust"
           },
           "impact": "hit",
-          "impactAt": 1.4
+          "impactWord": "Brasília"
         },
         {
-          "at": 2.6,
           "title": "ANÚNCIOS PAUSADOS",
           "caption": "PROGRAMAÇÃO ATÉ AS 23:00",
           "camera": {
@@ -77,7 +70,8 @@
             "y": 640,
             "size": 230,
             "color": "white"
-          }
+          },
+          "word": "pausa"
         }
       ]
     },
@@ -102,17 +96,16 @@
               "lat": 40.71,
               "label": "NOVA YORK",
               "value": "21:00",
-              "at": 1.5
+              "word": "nove"
             }
           ],
           "shape": {
             "kind": "dust"
           },
           "impact": "hit",
-          "impactAt": 1.85
+          "impactWord": "nove"
         },
         {
-          "at": 3.0,
           "title": "LOS ANGELES",
           "caption": "HORÁRIO DO PACÍFICO · UTC−8",
           "camera": {
@@ -129,14 +122,15 @@
               "lat": 34.05,
               "label": "LOS ANGELES",
               "value": "18:00",
-              "at": 1.25
+              "word": "seis"
             }
           ],
           "shape": {
             "kind": "dust"
           },
           "impact": "hit",
-          "impactAt": 1.35
+          "word": "Los",
+          "impactWord": "seis"
         }
       ]
     },
@@ -161,8 +155,8 @@
               "lat": -15.78,
               "label": "SUA CONTA",
               "value": "23:00",
-              "at": 1.9,
-              "below": true
+              "below": true,
+              "word": "conta"
             }
           ],
           "shape": {
@@ -171,7 +165,6 @@
           "source": "AJUDA DO GOOGLE ADS · PROGRAMAÇÃO DE ANÚNCIOS"
         },
         {
-          "at": 4.0,
           "title": "NÃO O DE QUEM COMPRA",
           "caption": "QUANDO VOCÊ PAUSA ÀS 23:00, LÁ AINDA É CEDO",
           "camera": {
@@ -224,7 +217,8 @@
             "kind": "dust"
           },
           "impact": "boom",
-          "impactAt": 0.9
+          "word": "Não",
+          "impactWord": "compra"
         }
       ]
     },
@@ -266,7 +260,6 @@
           }
         },
         {
-          "at": 2.3,
           "title": "PROGRAME PELO FUSO DELES",
           "caption": "OU AJUSTE OS HORÁRIOS PELA DIFERENÇA",
           "camera": {
@@ -302,10 +295,10 @@
             "color": "gold"
           },
           "impact": "hit",
-          "impactAt": 0.5
+          "word": "programe",
+          "impactWord": "relógio"
         },
         {
-          "at": 4.5,
           "title": "SEGUE O PERFIL",
           "caption": "MAIS GOOGLE ADS PRA QUEM VENDE LÁ FORA",
           "map": false,
@@ -318,9 +311,11 @@
           },
           "card": {
             "at": 0.3
-          }
+          },
+          "word": "Segue"
         }
       ]
     }
-  ]
+  ],
+  "voice": "audio/voice.mp3"
 }

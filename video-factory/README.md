@@ -16,24 +16,28 @@ Referência: reel "Binance · Anatomía del golpe" (85 s, 8 cenas). O que faz es
 ## Como produzir um episódio
 
 ```bash
-# 1. roteiro: copie um episódio e edite o episode.json (texto da narração em "vo", 1 por cena)
-cp -r episodes/001-leilao-google episodes/002-meu-tema
+# 1. roteiro: episodes/<slug>/episode.json, com o texto falado de cada cena em "vo" (ver ROTEIRO.md)
+# 2. voz: UM arquivo com a narração inteira em episodes/<slug>/audio/voice.mp3
+#    ("voice": "audio/voice.mp3" no episode.json). A voz NUNCA é cortada nem acelerada.
+#    Trilha opcional: audio/music.mp3
 
-# 2. narração: gere 1 MP3 por cena (vidIQ → vidiq_voiceover_generate, voz em "voice")
-#    salve como episodes/002-meu-tema/audio/raw-01.mp3, raw-02.mp3 ...
-#    trilha: audio/music.mp3 (vidiq_generate_music, ou reutilize uma do banco)
+# 3. alinhamento roteiro × voz (roda sozinho no render; rode à mão para conferir)
+node engine/align.js episodes/<slug>        # → timing.json com o tempo de cada frase e palavra
 
-# 3. limpar o áudio (corta silêncios, acelera 8 %, 48 kHz)
-engine/prep-audio.sh episodes/002-meu-tema
+# 4. conferir o visual antes do render longo: 1 quadro por segundo + folha de quadros
+node engine/render.js episodes/<slug> --stills   # → out/<slug>-folha.jpg
 
-# 4. conferir o visual (1 quadro a cada 1,5 s em out/stills, sem gerar vídeo)
-node engine/render.js episodes/002-meu-tema --stills
-
-# 5. render final → out/002-meu-tema.mp4 + out/002-meu-tema-capa.jpg
-node engine/render.js episodes/002-meu-tema
+# 5. render final + controle de qualidade automático
+node engine/render.js episodes/<slug>           # → out/<slug>.mp4, -capa.jpg, -qa.jpg
 ```
 
-A duração de cada cena sai **da duração real da narração**, então trocar o texto já ajusta o tempo. Os tempos internos (`at`, `winnerAt`, `compareAt`, `spiralAt`, `chipsAt`) são em segundos desde o início da cena. Use-os para fazer o visual "bater" com a palavra falada.
+**Alinhamento:** sem reconhecimento de fala. O `align.js` detecta os trechos de fala e silêncio e, por programação dinâmica, decide onde termina cada frase do roteiro. Ele casa o número de sílabas com a duração da fala, prefere cortes em pausas longas e evita fim de frase no meio da fala. Os cortes dos episódios 000 e 002 bateram com a análise manual.
+
+**Controle de qualidade (`engine/qa.sh`, roda no fim do render):** procura trechos congelados de 0,4 s ou mais e telas pretas no meio, mede o volume (LUFS e pico) e gera a folha `-qa.jpg`. Regra do motor: nada fica parado por mais de 4 quadros. Partículas "respiram", e a câmera do mapa avança devagar quando está parada.
+
+**Sincronia:** use `"word"` nas batidas, `"impactWord"` nos graves e `"word"` nos pinos. O visual entra 2 quadros antes da palavra; o grave, 1 quadro antes.
+
+O modo antigo (um arquivo de voz por cena, `audio/01.mp3`…) continua funcionando para o episódio 001.
 
 ## Tipos de cena (`engine/lib.js`)
 

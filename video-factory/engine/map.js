@@ -45,14 +45,16 @@
     let k = cur; while (k >= 0 && !beats[k].camera) k--;
     if (k < 0) return null;
     let j = k - 1; while (j >= 0 && !beats[j].camera) j--;
-    const to = camOf(beats[k]); if (j < 0) return { ...to, speed: 0 };
+    const to = camOf(beats[k]); if (j < 0) return creep({ ...to, speed: 0 }, T - beats[k].abs);
     const from = camOf(beats[j]), dur = beats[k].camDur ?? 1.15, u = U().clamp((T - beats[k].abs) / dur), e = U().ease(u);
     const dist = Math.hypot(to.lon - from.lon, to.Y - from.Y);
     const lz = Math.log(from.z) + (Math.log(to.z) - Math.log(from.z)) * e;
     const dip = Math.min(.55, dist / 140) * Math.sin(Math.PI * e);        // afasta no meio do voo, como um "fly to"
     const speed = u > 0 && u < 1 ? Math.sin(Math.PI * u) * Math.min(1, dist / 30 + Math.abs(Math.log(to.z / from.z))) : 0;
-    return { lon: from.lon + (to.lon - from.lon) * e, Y: from.Y + (to.Y - from.Y) * e, z: Math.exp(lz) * (1 - dip), speed };
+    return creep({ lon: from.lon + (to.lon - from.lon) * e, Y: from.Y + (to.Y - from.Y) * e, z: Math.exp(lz) * (1 - dip), speed }, T - beats[k].abs - dur);
   }
+  // câmera nunca para: depois de chegar, avança devagar (+2,5%/s) e desliza de leve
+  function creep(c, held) { if (held <= 0) return c; const h = Math.min(held, 6); return { ...c, z: c.z * (1 + .025 * h), lon: c.lon + .06 * h * Math.sin(h * .7) }; }
   const CY = H * .5;
   const proj = (cam, lon, lat) => ({ x: W / 2 + (lon - cam.lon) * cam.z, y: CY - (merc(lat) - cam.Y) * cam.z });
 

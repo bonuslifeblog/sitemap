@@ -1,0 +1,432 @@
+{
+ "voice": "audio/voice.mp3",
+ "duration": 27.481,
+ "phrases": [
+  {
+   "scene": 0,
+   "text": "Ele gastou mil dólares em anúncios e recebeu mil e trezentos.",
+   "start": 0.122,
+   "end": 4.245
+  },
+  {
+   "scene": 0,
+   "text": "Lucro de cento e trinta por cento?",
+   "start": 5.069,
+   "end": 6.889
+  },
+  {
+   "scene": 0,
+   "text": "Não.",
+   "start": 7.445,
+   "end": 7.79
+  },
+  {
+   "scene": 1,
+   "text": "Mil e trezentos sobre mil é o ROAS.",
+   "start": 8.446,
+   "end": 11.259
+  },
+  {
+   "scene": 1,
+   "text": "Mede o retorno bruto,",
+   "start": 11.961,
+   "end": 13.425
+  },
+  {
+   "scene": 1,
+   "text": "não o lucro.",
+   "start": 13.899,
+   "end": 14.739
+  },
+  {
+   "scene": 2,
+   "text": "O lucro é trezentos.",
+   "start": 15.494,
+   "end": 17.425
+  },
+  {
+   "scene": 2,
+   "text": "Trezentos sobre mil:",
+   "start": 18.105,
+   "end": 19.242
+  },
+  {
+   "scene": 2,
+   "text": "ROI de trinta por cento.",
+   "start": 19.979,
+   "end": 21.689
+  },
+  {
+   "scene": 3,
+   "text": "ROAS não é lucro.",
+   "start": 22.457,
+   "end": 24.085
+  },
+  {
+   "scene": 3,
+   "text": "Segue,",
+   "start": 24.709,
+   "end": 25.253
+  },
+  {
+   "scene": 3,
+   "text": "pra não se enganar com o painel.",
+   "start": 25.915,
+   "end": 27.481
+  }
+ ],
+ "words": [
+  {
+   "w": "Ele",
+   "t": 0.122,
+   "scene": 0
+  },
+  {
+   "w": "gastou",
+   "t": 0.515,
+   "scene": 0
+  },
+  {
+   "w": "mil",
+   "t": 0.908,
+   "scene": 0
+  },
+  {
+   "w": "dólares",
+   "t": 1.104,
+   "scene": 0
+  },
+  {
+   "w": "em",
+   "t": 1.693,
+   "scene": 0
+  },
+  {
+   "w": "anúncios",
+   "t": 1.889,
+   "scene": 0
+  },
+  {
+   "w": "e",
+   "t": 2.478,
+   "scene": 0
+  },
+  {
+   "w": "recebeu",
+   "t": 2.675,
+   "scene": 0
+  },
+  {
+   "w": "mil",
+   "t": 3.264,
+   "scene": 0
+  },
+  {
+   "w": "e",
+   "t": 3.46,
+   "scene": 0
+  },
+  {
+   "w": "trezentos.",
+   "t": 3.656,
+   "scene": 0
+  },
+  {
+   "w": "Lucro",
+   "t": 5.069,
+   "scene": 0
+  },
+  {
+   "w": "de",
+   "t": 5.4,
+   "scene": 0
+  },
+  {
+   "w": "cento",
+   "t": 5.566,
+   "scene": 0
+  },
+  {
+   "w": "e",
+   "t": 5.896,
+   "scene": 0
+  },
+  {
+   "w": "trinta",
+   "t": 6.062,
+   "scene": 0
+  },
+  {
+   "w": "por",
+   "t": 6.393,
+   "scene": 0
+  },
+  {
+   "w": "cento?",
+   "t": 6.558,
+   "scene": 0
+  },
+  {
+   "w": "Não.",
+   "t": 7.445,
+   "scene": 0
+  },
+  {
+   "w": "Mil",
+   "t": 8.446,
+   "scene": 1
+  },
+  {
+   "w": "e",
+   "t": 8.664,
+   "scene": 1
+  },
+  {
+   "w": "trezentos",
+   "t": 8.882,
+   "scene": 1
+  },
+  {
+   "w": "sobre",
+   "t": 9.536,
+   "scene": 1
+  },
+  {
+   "w": "mil",
+   "t": 10.387,
+   "scene": 1
+  },
+  {
+   "w": "é",
+   "t": 10.605,
+   "scene": 1
+  },
+  {
+   "w": "o",
+   "t": 10.823,
+   "scene": 1
+  },
+  {
+   "w": "ROAS.",
+   "t": 11.041,
+   "scene": 1
+  },
+  {
+   "w": "Mede",
+   "t": 11.961,
+   "scene": 1
+  },
+  {
+   "w": "o",
+   "t": 12.327,
+   "scene": 1
+  },
+  {
+   "w": "retorno",
+   "t": 12.51,
+   "scene": 1
+  },
+  {
+   "w": "bruto,",
+   "t": 13.059,
+   "scene": 1
+  },
+  {
+   "w": "não",
+   "t": 13.899,
+   "scene": 1
+  },
+  {
+   "w": "o",
+   "t": 14.109,
+   "scene": 1
+  },
+  {
+   "w": "lucro.",
+   "t": 14.319,
+   "scene": 1
+  },
+  {
+   "w": "O",
+   "t": 15.494,
+   "scene": 2
+  },
+  {
+   "w": "lucro",
+   "t": 15.702,
+   "scene": 2
+  },
+  {
+   "w": "é",
+   "t": 16.593,
+   "scene": 2
+  },
+  {
+   "w": "trezentos.",
+   "t": 16.801,
+   "scene": 2
+  },
+  {
+   "w": "Trezentos",
+   "t": 18.105,
+   "scene": 2
+  },
+  {
+   "w": "sobre",
+   "t": 18.674,
+   "scene": 2
+  },
+  {
+   "w": "mil:",
+   "t": 19.053,
+   "scene": 2
+  },
+  {
+   "w": "ROI",
+   "t": 19.979,
+   "scene": 2
+  },
+  {
+   "w": "de",
+   "t": 20.223,
+   "scene": 2
+  },
+  {
+   "w": "trinta",
+   "t": 20.467,
+   "scene": 2
+  },
+  {
+   "w": "por",
+   "t": 20.956,
+   "scene": 2
+  },
+  {
+   "w": "cento.",
+   "t": 21.2,
+   "scene": 2
+  },
+  {
+   "w": "ROAS",
+   "t": 22.457,
+   "scene": 3
+  },
+  {
+   "w": "não",
+   "t": 22.729,
+   "scene": 3
+  },
+  {
+   "w": "é",
+   "t": 23.001,
+   "scene": 3
+  },
+  {
+   "w": "lucro.",
+   "t": 23.541,
+   "scene": 3
+  },
+  {
+   "w": "Segue,",
+   "t": 24.709,
+   "scene": 3
+  },
+  {
+   "w": "pra",
+   "t": 25.915,
+   "scene": 3
+  },
+  {
+   "w": "não",
+   "t": 26.071,
+   "scene": 3
+  },
+  {
+   "w": "se",
+   "t": 26.228,
+   "scene": 3
+  },
+  {
+   "w": "enganar",
+   "t": 26.385,
+   "scene": 3
+  },
+  {
+   "w": "com",
+   "t": 26.854,
+   "scene": 3
+  },
+  {
+   "w": "o",
+   "t": 27.011,
+   "scene": 3
+  },
+  {
+   "w": "painel.",
+   "t": 27.168,
+   "scene": 3
+  }
+ ],
+ "segments": [
+  [
+   0.122,
+   4.245
+  ],
+  [
+   5.069,
+   6.889
+  ],
+  [
+   7.445,
+   7.79
+  ],
+  [
+   8.446,
+   9.943
+  ],
+  [
+   10.358,
+   11.259
+  ],
+  [
+   11.961,
+   13.425
+  ],
+  [
+   13.899,
+   14.739
+  ],
+  [
+   15.494,
+   16.005
+  ],
+  [
+   16.48,
+   17.425
+  ],
+  [
+   18.105,
+   19.242
+  ],
+  [
+   19.979,
+   21.689
+  ],
+  [
+   22.457,
+   23.085
+  ],
+  [
+   23.352,
+   24.085
+  ],
+  [
+   24.709,
+   25.253
+  ],
+  [
+   25.915,
+   27.481
+  ]
+ ]
+}

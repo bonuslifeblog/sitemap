@@ -11,12 +11,6 @@
   ],
   "coverAt": 6.0,
   "musicGain": 0.32,
-  "gap": 0.3,
-  "voCuts": [
-    8.12,
-    16.24,
-    22.07
-  ],
   "scenes": [
     {
       "vo": "Ele gastou mil dólares em anúncios e recebeu mil e trezentos. Lucro de cento e trinta por cento? Não.",
@@ -43,7 +37,6 @@
           "dur": 1.2
         },
         {
-          "at": 2.1,
           "title": "RETORNO",
           "sub": {
             "from": 1000,
@@ -63,10 +56,10 @@
             "color": "gold"
           },
           "source": "CADA MOEDA = US$ 100",
-          "impact": "hit"
+          "impact": "hit",
+          "word": "recebeu"
         },
         {
-          "at": 4.6,
           "title": "LUCRO DE 130%?",
           "caption": "1.300 ÷ 1.000 = 1,3",
           "shape": {
@@ -76,10 +69,10 @@
             "color": "gold"
           },
           "via": "burst",
-          "dur": 1.1
+          "dur": 1.1,
+          "word": "Lucro"
         },
         {
-          "at": 6.85,
           "title": "NÃO.",
           "caption": "ERRO DE LEITURA DO PAINEL",
           "shape": {
@@ -97,7 +90,8 @@
           "dur": 0.35,
           "stagger": 0.05,
           "impact": "hit",
-          "impactAt": 0.05
+          "word": "Não",
+          "impactWord": "Não"
         }
       ]
     },
@@ -127,7 +121,6 @@
           }
         },
         {
-          "at": 1.9,
           "title": "ROAS",
           "sub": "1,3",
           "subColor": "gold",
@@ -139,10 +132,11 @@
             "color": "gold"
           },
           "source": "FÓRMULA · ROAS = RETORNO ÷ GASTO",
-          "impact": "hit"
+          "impact": "hit",
+          "word": "ROAS",
+          "impactWord": "ROAS"
         },
         {
-          "at": 3.1,
           "title": "retorno bruto",
           "serif": true,
           "caption": "TUDO QUE ENTROU",
@@ -155,10 +149,10 @@
             "h": 560,
             "color": "gold"
           },
-          "via": "burst"
+          "via": "burst",
+          "word": "Mede"
         },
         {
-          "at": 4.9,
           "title": "NÃO O LUCRO",
           "sub": "10 + 3",
           "caption": "10 DE CADA 13 MOEDAS PAGAM O ANÚNCIO",
@@ -175,7 +169,8 @@
               "color": "dim",
               "from": "start"
             }
-          }
+          },
+          "word": "não"
         }
       ]
     },
@@ -203,7 +198,6 @@
           }
         },
         {
-          "at": 1.7,
           "title": "300 ÷ 1.000",
           "caption": "LUCRO ÷ GASTO",
           "shape": {
@@ -211,10 +205,10 @@
             "text": "300 ÷ 1.000",
             "size": 170,
             "color": "white"
-          }
+          },
+          "word": "trezentos#2"
         },
         {
-          "at": 3.1,
           "title": "ROI",
           "sub": {
             "from": 0,
@@ -231,7 +225,9 @@
             "color": "gold"
           },
           "source": "FÓRMULA · ROI = (RETORNO − GASTO) ÷ GASTO",
-          "impact": "boom"
+          "impact": "boom",
+          "word": "ROI",
+          "impactWord": "trinta"
         }
       ]
     },
@@ -268,7 +264,6 @@
           }
         },
         {
-          "at": 1.9,
           "title": "SEGUE O PERFIL",
           "caption": "PRA LER O PAINEL DO JEITO CERTO",
           "shape": {
@@ -280,9 +275,11 @@
           },
           "card": {
             "at": 0.4
-          }
+          },
+          "word": "Segue"
         }
       ]
     }
-  ]
+  ],
+  "voice": "audio/voice.mp3"
 }

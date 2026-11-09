@@ -1,0 +1,412 @@
+{
+ "voice": "audio/voice.mp3",
+ "duration": 26.122,
+ "phrases": [
+  {
+   "scene": 0,
+   "text": "São onze da noite em Brasília.",
+   "start": 0,
+   "end": 2.141
+  },
+  {
+   "scene": 0,
+   "text": "Você pausa os anúncios e vai dormir.",
+   "start": 2.91,
+   "end": 5.526
+  },
+  {
+   "scene": 1,
+   "text": "Em Nova York,",
+   "start": 6.366,
+   "end": 7.125
+  },
+  {
+   "scene": 1,
+   "text": "ainda são nove da noite.",
+   "start": 7.463,
+   "end": 8.847
+  },
+  {
+   "scene": 1,
+   "text": "Em Los Angeles,",
+   "start": 9.686,
+   "end": 10.531
+  },
+  {
+   "scene": 1,
+   "text": "seis da tarde.",
+   "start": 10.989,
+   "end": 11.988
+  },
+  {
+   "scene": 2,
+   "text": "Só que o Google Ads segue o fuso da sua conta.",
+   "start": 12.725,
+   "end": 16.324
+  },
+  {
+   "scene": 2,
+   "text": "Não o de quem compra.",
+   "start": 17.118,
+   "end": 18.878
+  },
+  {
+   "scene": 3,
+   "text": "Se você vende pros Estados Unidos,",
+   "start": 19.961,
+   "end": 22.072
+  },
+  {
+   "scene": 3,
+   "text": "programe pelo relógio deles.",
+   "start": 22.552,
+   "end": 24.318
+  },
+  {
+   "scene": 3,
+   "text": "Segue pra mais.",
+   "start": 24.901,
+   "end": 26.122
+  }
+ ],
+ "words": [
+  {
+   "w": "São",
+   "t": 0,
+   "scene": 0
+  },
+  {
+   "w": "onze",
+   "t": 0.214,
+   "scene": 0
+  },
+  {
+   "w": "da",
+   "t": 0.642,
+   "scene": 0
+  },
+  {
+   "w": "noite",
+   "t": 0.856,
+   "scene": 0
+  },
+  {
+   "w": "em",
+   "t": 1.284,
+   "scene": 0
+  },
+  {
+   "w": "Brasília.",
+   "t": 1.498,
+   "scene": 0
+  },
+  {
+   "w": "Você",
+   "t": 2.91,
+   "scene": 0
+  },
+  {
+   "w": "pausa",
+   "t": 3.276,
+   "scene": 0
+  },
+  {
+   "w": "os",
+   "t": 3.642,
+   "scene": 0
+  },
+  {
+   "w": "anúncios",
+   "t": 3.825,
+   "scene": 0
+  },
+  {
+   "w": "e",
+   "t": 4.793,
+   "scene": 0
+  },
+  {
+   "w": "vai",
+   "t": 4.976,
+   "scene": 0
+  },
+  {
+   "w": "dormir.",
+   "t": 5.159,
+   "scene": 0
+  },
+  {
+   "w": "Em",
+   "t": 6.366,
+   "scene": 1
+  },
+  {
+   "w": "Nova",
+   "t": 6.555,
+   "scene": 1
+  },
+  {
+   "w": "York,",
+   "t": 6.935,
+   "scene": 1
+  },
+  {
+   "w": "ainda",
+   "t": 7.463,
+   "scene": 1
+  },
+  {
+   "w": "são",
+   "t": 7.809,
+   "scene": 1
+  },
+  {
+   "w": "nove",
+   "t": 7.982,
+   "scene": 1
+  },
+  {
+   "w": "da",
+   "t": 8.328,
+   "scene": 1
+  },
+  {
+   "w": "noite.",
+   "t": 8.501,
+   "scene": 1
+  },
+  {
+   "w": "Em",
+   "t": 9.686,
+   "scene": 1
+  },
+  {
+   "w": "Los",
+   "t": 9.855,
+   "scene": 1
+  },
+  {
+   "w": "Angeles,",
+   "t": 10.024,
+   "scene": 1
+  },
+  {
+   "w": "seis",
+   "t": 10.989,
+   "scene": 1
+  },
+  {
+   "w": "da",
+   "t": 11.239,
+   "scene": 1
+  },
+  {
+   "w": "tarde.",
+   "t": 11.489,
+   "scene": 1
+  },
+  {
+   "w": "Só",
+   "t": 12.725,
+   "scene": 2
+  },
+  {
+   "w": "que",
+   "t": 12.947,
+   "scene": 2
+  },
+  {
+   "w": "o",
+   "t": 13.169,
+   "scene": 2
+  },
+  {
+   "w": "Google",
+   "t": 13.391,
+   "scene": 2
+  },
+  {
+   "w": "Ads",
+   "t": 13.835,
+   "scene": 2
+  },
+  {
+   "w": "segue",
+   "t": 14.056,
+   "scene": 2
+  },
+  {
+   "w": "o",
+   "t": 14.77,
+   "scene": 2
+  },
+  {
+   "w": "fuso",
+   "t": 14.992,
+   "scene": 2
+  },
+  {
+   "w": "da",
+   "t": 15.436,
+   "scene": 2
+  },
+  {
+   "w": "sua",
+   "t": 15.658,
+   "scene": 2
+  },
+  {
+   "w": "conta.",
+   "t": 15.88,
+   "scene": 2
+  },
+  {
+   "w": "Não",
+   "t": 17.118,
+   "scene": 2
+  },
+  {
+   "w": "o",
+   "t": 17.354,
+   "scene": 2
+  },
+  {
+   "w": "de",
+   "t": 17.59,
+   "scene": 2
+  },
+  {
+   "w": "quem",
+   "t": 18.171,
+   "scene": 2
+  },
+  {
+   "w": "compra.",
+   "t": 18.407,
+   "scene": 2
+  },
+  {
+   "w": "Se",
+   "t": 19.961,
+   "scene": 3
+  },
+  {
+   "w": "você",
+   "t": 20.137,
+   "scene": 3
+  },
+  {
+   "w": "vende",
+   "t": 20.489,
+   "scene": 3
+  },
+  {
+   "w": "pros",
+   "t": 20.84,
+   "scene": 3
+  },
+  {
+   "w": "Estados",
+   "t": 21.016,
+   "scene": 3
+  },
+  {
+   "w": "Unidos,",
+   "t": 21.544,
+   "scene": 3
+  },
+  {
+   "w": "programe",
+   "t": 22.552,
+   "scene": 3
+  },
+  {
+   "w": "pelo",
+   "t": 23.082,
+   "scene": 3
+  },
+  {
+   "w": "relógio",
+   "t": 23.435,
+   "scene": 3
+  },
+  {
+   "w": "deles.",
+   "t": 23.965,
+   "scene": 3
+  },
+  {
+   "w": "Segue",
+   "t": 24.901,
+   "scene": 3
+  },
+  {
+   "w": "pra",
+   "t": 25.512,
+   "scene": 3
+  },
+  {
+   "w": "mais.",
+   "t": 25.817,
+   "scene": 3
+  }
+ ],
+ "segments": [
+  [
+   0,
+   2.141
+  ],
+  [
+   2.91,
+   4.341
+  ],
+  [
+   4.761,
+   5.526
+  ],
+  [
+   6.366,
+   7.125
+  ],
+  [
+   7.463,
+   8.847
+  ],
+  [
+   9.686,
+   10.531
+  ],
+  [
+   10.989,
+   11.988
+  ],
+  [
+   12.725,
+   14.123
+  ],
+  [
+   14.393,
+   16.324
+  ],
+  [
+   17.118,
+   17.598
+  ],
+  [
+   17.943,
+   18.878
+  ],
+  [
+   19.961,
+   22.072
+  ],
+  [
+   22.552,
+   24.318
+  ],
+  [
+   24.901,
+   26.122
+  ]
+ ]
+}

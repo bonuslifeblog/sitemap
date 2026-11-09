@@ -210,6 +210,12 @@
   function karaoke(sc, T) {
     if (!sc.vo || EP.subtitles === false) return;
     const lt = T - sc.start - sc.voStart; if (lt < -.1 || lt > sc.voDur + .3) return;
+    if (!sc._words && sc.words) { // tempos reais vindos do alinhamento
+      sc._words = sc.words.map(w => ({ w: w.w, st: w.t - sc.start - sc.voStart }));
+      const ch = []; let cur = [];
+      sc._words.forEach(w => { cur.push(w); if (cur.length >= 6 || /[.?!:]$/.test(w.w) || (cur.length >= 4 && /,$/.test(w.w))) { ch.push(cur); cur = []; } });
+      if (cur.length) ch.push(cur); sc._chunks = ch;
+    }
     if (!sc._words) { // tempo de cada palavra proporcional ao nº de vogais (≈ sílabas), com peso extra na pontuação
       const ws = sc.vo.split(/\s+/), wt = ws.map(w => Math.max(1, (w.match(/[aeiouáéíóúâêôãõà]/gi) || []).length) + (/[.,:?!]$/.test(w) ? 1.6 : 0));
       const tot = wt.reduce((a, b) => a + b, 0); let acc = 0;
@@ -236,9 +242,22 @@
   // ---------- linha do tempo ----------
   function build() {
     BEATS = [];
-    EP.scenes.forEach(sc => (sc.beats || []).forEach((b, k) => {
-      const abs = sc.start + (k === 0 && !b.at ? 0 : sc.voStart + (b.at || 0));
-      BEATS.push({ ...b, sc, abs });
+    // tempo de uma palavra da narração ("Brasília", ou "lucro#2" para a 2ª ocorrência na cena)
+    const norm = w => w.toLowerCase().replace(/[^\p{L}\p{N}$%]/gu, '');
+    const wordTime = (sc, key) => {
+      if (!sc.words) throw new Error(`"word" exige voz alinhada (episode.voice): ${key}`);
+      const [w, nth] = key.split('#'), hits = sc.words.filter(x => norm(x.w) === norm(w));
+      const hit = hits[(+nth || 1) - 1]; if (!hit) throw new Error(`palavra "${key}" não encontrada na cena ${sc.index + 1}`);
+      return hit.t;
+    };
+    const LEADF = 2 / FPS; // a reação visual entra 2 quadros antes da palavra
+    EP.scenes.forEach(sc => (sc.beats || []).forEach((b0, k) => {
+      const b = { ...b0 };
+      const abs = b.word ? wordTime(sc, b.word) - LEADF : sc.start + (k === 0 && !b.at ? 0 : sc.voStart + (b.at || 0));
+      if (b.impactWord) b.impactAt = wordTime(sc, b.impactWord) - abs - 1 / FPS;
+      if (b.pins) b.pins = b.pins.map(p => p.word ? { ...p, at: wordTime(sc, p.word) - LEADF - abs } : p);
+      if (b.lock && b.lock.word) b.lock = { ...b.lock, at: wordTime(sc, b.lock.word) - LEADF - abs };
+      BEATS.push({ ...b, sc, abs: Math.max(sc.start, abs) });
     }));
     BEATS.sort((a, b) => a.abs - b.abs);
     BEATS.forEach((b, i) => { b.end = i + 1 < BEATS.length ? BEATS[i + 1].abs : EP.duration; b.shapeObj = SHAPES[(b.shape || { kind: 'dust' }).kind](b.shape || {}, b); });
