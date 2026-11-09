@@ -55,7 +55,9 @@ if (ep.voice) {
 console.log(`duração: ${ep.duration.toFixed(1)}s, ${ep.scenes.length} cenas`);
 
 (async () => {
-  const browser = await chromium.launch();
+  // na nuvem do Claude Code há um Chromium pré-instalado; no Mac usa o do `npx playwright install chromium`
+  const pre = '/opt/pw-browsers/chromium';
+  const browser = await chromium.launch(fs.existsSync(pre) && fs.statSync(pre).isFile() ? { executablePath: pre } : {});
   const page = await browser.newPage({ viewport: { width: 1080, height: 1920 } });
   page.on('pageerror', e => { console.error('ERRO NA PÁGINA:', e.message); process.exit(1); });
   await page.goto('file://' + path.join(ROOT, 'engine', 'page.html'));
